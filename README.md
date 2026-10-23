@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Liên Kết Studio – Frontend
 
-## Getting Started
+Next.js 16 (App Router, Cache Components, TypeScript, Tailwind v4), tối ưu SEO và cache CDN.
 
-First, run the development server:
+## Chạy dự án
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local   # sửa NEXT_PUBLIC_SITE_URL
+npm install
+npm run dev                  # http://localhost:3000
+npm run build && npm start   # production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cấu trúc
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/
+    layout.tsx               # Metadata gốc, font tiếng Việt, JSON-LD Organization + WebSite
+    page.tsx                 # Trang chủ
+    blog/[slug]/             # Bài viết: generateStaticParams, generateMetadata, JSON-LD, OG image động
+    gioi-thieu/              # Trang tĩnh
+    sitemap.ts robots.ts manifest.ts opengraph-image.tsx icon.svg
+    api/revalidate/route.ts  # Webhook làm mới cache + purge CDN
+  config/site.ts             # Tên site, domain, menu, social
+  lib/seo.ts                 # buildMetadata(): canonical, OG, Twitter
+  lib/data/posts.ts          # Data layer có "use cache" + cacheTag
+  lib/cdn.ts                 # cdn(): gắn domain CDN cho file /public
+  lib/cdn-purge.ts           # Purge Cloudflare
+deploy/nginx.conf            # Reverse proxy + cache tầng origin
+Dockerfile                   # Build standalone
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## SEO có sẵn
 
-## Learn More
+- `metadataBase`, title template `%s | Liên Kết Studio`, canonical cho từng trang
+- Open Graph + Twitter card, ảnh OG sinh tự động (`opengraph-image.tsx`)
+- `sitemap.xml`, `robots.txt` (staging: `NEXT_PUBLIC_NOINDEX=true`), `manifest.webmanifest`
+- JSON-LD: Organization, WebSite, BlogPosting, BreadcrumbList
+- `lang="vi"`, font Be Vietnam Pro tự host (subset vietnamese, `display: swap`)
+- Trang được **prerender thành HTML tĩnh** → TTFB thấp, bot đọc được đầy đủ nội dung
 
-To learn more about Next.js, take a look at the following resources:
+Thêm trang mới: export `metadata = buildMetadata({ title, description, path })` và thêm URL vào `sitemap.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Chiến lược cache (3 tầng)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Tầng | Cái gì | Thời gian |
+| --- | --- | --- |
+| Trình duyệt | `/_next/static/*` (có hash) | 1 năm, `immutable` |
+| CDN | HTML trang (`s-maxage` + `stale-while-revalidate`) | theo `cacheLife` (`content`: 1h, giữ bản cũ 7 ngày) |
+| CDN | File `/public` (ảnh, font, icon) | trình duyệt 1 ngày, CDN 31 ngày |
+| Next.js server | Dữ liệu `"use cache"` | theo `cacheLife`, xoá bằng `cacheTag` |
+| Next.js server | Ảnh `next/image` đã tối ưu (avif/webp) | 31 ngày |
 
-## Deploy on Vercel
+Profile cache khai báo trong `next.config.ts` → `cacheLife`. Dùng trong data function:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+export async function getProducts() {
+  "use cache";
+  cacheLife("content");
+  cacheTag("products");
+  return fetch(`${process.env.API_URL}/products`).then((r) => r.json());
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Khi nội dung thay đổi
+
+CMS/backend gọi webhook:
+
+```bash
+curl -X POST https://lienketstudio.com/api/revalidate \
+  -H "x-revalidate-secret: $REVALIDATE_SECRET" \
+  -H "content-type: application/json" \
+  -d '{"tags":["posts"],"paths":["/blog","/blog/slug-bai-viet"]}'
+```
+
+→ đánh dấu cache Next.js là cũ (người dùng vẫn nhận bản cũ ngay, bản mới render nền) và purge CDN các đường dẫn đó.
+
+## Cấu hình CDN
+
+**Cách 1 – Cloudflare proxy toàn domain (khuyến nghị, đơn giản nhất)**
+
+1. Trỏ DNS qua Cloudflare, bật proxy (mây cam).
+2. Tạo *Cache Rule*: hostname = domain, không phải `/api/*` → **Eligible for cache**, Edge TTL: *Use cache-control header*, Browser TTL: *Respect origin*.
+3. **Không** bật "Ignore query string" – `?_rsc=` phải nằm trong cache key, nếu không sẽ trộn HTML với RSC payload làm hỏng điều hướng.
+4. Điền `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (quyền *Zone.Cache Purge*) để webhook tự purge.
+
+**Cách 2 – Domain CDN riêng cho assets (BunnyCDN, CloudFront, ...)**
+
+1. Tạo pull zone `cdn.lienketstudio.com` với origin = domain chính.
+2. Build với `NEXT_PUBLIC_CDN_URL=https://cdn.lienketstudio.com` → JS/CSS tự lấy từ CDN.
+3. File trong `/public` dùng `cdn("/images/x.jpg")` để trỏ qua CDN.
+
+Có thể kết hợp cả hai. Nếu chạy nhiều instance, đặt cùng `deploymentId` và `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`, và dùng cache handler chung (Redis) – xem `node_modules/next/dist/docs/01-app/02-guides/self-hosting.md`.
+
+## Deploy
+
+```bash
+docker build --build-arg NEXT_PUBLIC_SITE_URL=https://lienketstudio.com -t lienketstudio-fe .
+docker run -p 3000:3000 -e REVALIDATE_SECRET=... lienketstudio-fe
+```
+
+Đặt `deploy/nginx.conf` phía trước (VPS) để có thêm tầng cache ở origin.
+
+## Lưu ý
+
+- `NEXT_PUBLIC_*` được nhúng lúc build → đổi domain phải build lại.
+- Không dùng `cookies()`/`headers()` trong trang cần SEO trừ khi bắt buộc – trang sẽ thành dynamic (`Cache-Control: private`) và CDN không cache được.
+- Ảnh: dùng `next/image` với `sizes` hợp lý; ảnh từ domain ngoài phải khai báo trong `images.remotePatterns`.
