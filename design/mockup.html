@@ -244,7 +244,7 @@ label.f{font-size:13.5px}
 .ph{background:linear-gradient(135deg,#F1F1F3,#E6E6EA)}
 .meter .bar{background:#EDEDF0}
 .sitebar{box-shadow:var(--sh1)}
-.site,.site>*,.site section{min-width:0;max-width:100%}.site .tbl{max-width:100%}
+.site>*,.site section{min-width:0;max-width:100%}.site .tbl{max-width:100%}
 .tbl{position:relative}
 @media (max-width:900px){
   .app{flex-direction:column}
@@ -469,6 +469,42 @@ input.sw::after,.sysForm input[type=checkbox]::after,#setForm input[type=checkbo
 .iconbtn .dot{border-radius:3px}
 .modebar a,.modebar button{border-radius:3px}
 .tk.on{box-shadow:inset 2px 0 0 var(--accent)}
+/* ===== Trang so sánh giá ===== */
+.cmp-hero{display:flex;flex-direction:column;gap:14px;padding:28px 0 6px}
+.cmp-hero h1{font-size:30px;letter-spacing:-.02em}
+.cmp-box{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 6px 6px 14px;color:var(--muted)}
+.cmp-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.cmp-box input{flex:1;min-width:0;border:none!important;box-shadow:none!important;outline:none;background:transparent;padding:0!important;font-size:15px;color:var(--ink)}
+.cmp-box.big{padding:8px 8px 8px 16px}.cmp-box.big input{font-size:16.5px;min-height:44px}
+.cmp-q{display:flex;flex-direction:column;gap:8px}.cmp-q .err{min-height:0}.cmp-q .err:empty{display:none}
+.cmp-targets{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tgt{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px 0 8px;border:1px solid var(--line);border-radius:4px;background:#fff;font:inherit;font-size:13.5px;color:var(--ink2);cursor:pointer}
+.tgt .ck{width:18px;height:18px;border-radius:2px;border:1px solid #C9CACF;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.tgt.on{border-color:var(--accent);color:var(--ink);background:var(--accent-row)}.tgt.on .ck{background:var(--accent);border-color:var(--accent)}
+.cmp-how{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;counter-reset:s}
+.cmp-how li{background:#fff;padding:12px 14px;display:flex;flex-direction:column;gap:2px;font-size:13.5px;counter-increment:s}
+.cmp-how li b::before{content:counter(s) ". ";color:var(--accent)}
+.cmp-how li span{color:var(--muted);font-size:13px}
+.pick{display:flex;align-items:center;gap:12px;width:100%;padding:12px 20px;border:none;border-top:1px solid var(--line2);background:#fff;font:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+.pick:hover{background:#FAFAFA}
+.src{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:18px 20px}
+.srcimg{width:120px;height:120px;flex:0 0 auto;border-radius:4px}
+.srcinfo{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.srcprice{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.srcprice b{font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.verdict{display:flex;flex-direction:column;gap:2px;padding:14px 18px;border-radius:6px;background:var(--accent-row);border:1px solid var(--accent-soft);font-size:14px}
+.verdict b{font-size:17px;font-weight:600}.verdict span{color:var(--ink2)}
+.verdict.same{background:#F7F7F8;border-color:var(--line)}
+.mrow{display:flex;align-items:center;gap:12px;padding:12px 20px;border-top:1px solid var(--line2);font-size:14px;flex-wrap:wrap}
+.mprice{display:flex;flex-direction:column;align-items:flex-end;min-width:120px;font-size:13px}
+.mprice b{font-size:15px}
+.cheaper{color:#127A4B;font-weight:500}.dearer{color:var(--muted)}
+.site-ic{width:32px;height:32px;border-radius:4px;background:var(--soft);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:0 0 auto}
+@media (max-width:640px){.mrow{gap:8px 12px}.mrow>span:nth-child(2){flex:1 1 calc(100% - 50px)}.mrow>.badge{order:-1}.mrow>.badge+span{flex:1 1 100%!important}.mprice{flex-direction:row;gap:8px;align-items:baseline}.srcimg{width:72px;height:72px}.srcinfo{flex-basis:calc(100% - 90px)}.srcprice{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px;width:100%}.srcprice .small{width:100%}.cmp-hero h1{font-size:24px}.mprice{align-items:flex-start;min-width:0}.mrow .btn{margin-left:auto}.cmp-box .btn{padding:0 12px}}
+.sitebar .logo{padding:0}
+.sitebar .logo i{width:30px;height:30px}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:18px 20px}
+.cta>div:first-child{flex:1 1 320px}
 </style>
 </head>
 <body>
@@ -477,7 +513,7 @@ input.sw::after,.sysForm input[type=checkbox]::after,#setForm input[type=checkbo
   <button type="button" id="m-admin" data-demo="customer">Khách hàng</button>
   <button type="button" id="m-sa" data-demo="admin">Quản trị viên</button>
   <a href="#/login" id="m-login">Đăng nhập</a>
-  <a href="#/site/a" id="m-site">Trang so sánh giá</a>
+  <a href="#/" id="m-site">Trang chủ</a>
   <span class="sp"></span>
   <span style="opacity:.75">Dữ liệu mẫu</span>
   <button type="button" id="reset">Đặt lại dữ liệu</button>
@@ -526,9 +562,9 @@ function initial(){
     nextId:6,
     matches:{c:'pending'},
     notifs:[
-      {id:1,t:'10:41',x:'Gói video TikTok cho [Model G] đã sẵn sàng',read:false,go:'#/schedule/tiktok'},
-      {id:2,t:'10:20',x:'[Model D] bị gắn cờ giảm giá ảo',read:false,go:'#/review'},
-      {id:3,t:'08:00',x:'AccessTrade vượt giới hạn tần suất, đã tự thử lại',read:true,go:'#/sources'}
+      {id:1,t:'10:41',x:'Gói video TikTok cho [Model G] đã sẵn sàng',read:false,go:'#/app/schedule/tiktok'},
+      {id:2,t:'10:20',x:'[Model D] bị gắn cờ giảm giá ảo',read:false,go:'#/app/review'},
+      {id:3,t:'08:00',x:'AccessTrade vượt giới hạn tần suất, đã tự thử lại',read:true,go:'#/app/sources'}
     ],
     conn:{tiktokUpload:false,fbPage:true},
     settings:{minDrop:15,minScore:70,fakeRise:20,minComm:3,capFb:10,capGroup:5,disclosure:'Bài có chứa link tiếp thị liên kết. Mình nhận hoa hồng nếu bạn mua qua link, giá bạn trả không đổi.',verify:true,manual:true,aiNoClaims:true},
@@ -566,7 +602,7 @@ function initialSys(){return{
 }}
 function best(d){const ks=Object.keys(d.offers).filter(k=>d.offers[k].stock!==false);const arr=(ks.length?ks:Object.keys(d.offers)).map(k=>({k,...d.offers[k]}));return arr.sort((x,y)=>x.final-y.final)[0]}
 const drop=d=>Math.round((best(d).final-d.avg30)/d.avg30*100);
-const KEY='lienket-mockup-v2';let S;
+const KEY='lienket-mockup-v3';let S;
 try{S=JSON.parse(localStorage.getItem(KEY))||initial()}catch(e){S=initial()}
 if(!S.sys)S.sys=initialSys();
 if(!S.acct)S.acct=initialAcct();
@@ -613,12 +649,12 @@ const TITLES={home:'Tổng quan',review:'Duyệt deal',schedule:'Lịch đăng',
 function shell(active,inner){
   const c=counts();
   const l=(h,t,k,n)=>`<a href="${h}" class="${active===k?'on':''}" ${active===k?'aria-current="page"':''}>${ico(k)}<span class="lb">${t}</span>${n?`<span class="cnt">${n}</span>`:''}</a>`;
-  return `<div class="app"><aside class="side"><a class="logo" href="#/"><i>${CHECK}</i><span>Lienket<small>Studio</small></span></a>
-  <nav aria-label="Lienket Studio"><span class="grp">Vận hành</span>${l('#/','Tổng quan','home')}${l('#/review','Duyệt deal','review',c.review)}${l('#/schedule/fbpage','Lịch đăng','schedule',c.todo)}${l('#/matching','Ghép sản phẩm','matching',c.match)}
-  <span class="grp">Phân tích</span>${l('#/performance','Thống kê','perf')}${l('#/links','Liên kết','links')}
-  <span class="grp">Hệ thống</span>${l('#/accounts','Tài khoản liên kết','accounts',acctAlerts())}${l('#/sources','Kết nối và nguồn','sources')}${l('#/settings','Cài đặt','settings')}</nav>
-  <div class="sidefoot"><a class="sitelink" href="#/site/a">${ico('globe',16)}<span>Xem trang so sánh giá</span>${ico('arrow',14)}</a>
-  <a class="me" href="#/settings/billing" style="text-decoration:none"><span class="avatar">${esc(ME().ws.split(' ').slice(0,2).map(x=>x[0]).join('').toUpperCase())}</span><div><b>${esc(ME().ws)}</b><span>Gói ${S.plans[ME().plan].name}</span></div></a></div></aside>
+  return `<div class="app"><aside class="side"><a class="logo" href="#/app"><i>${CHECK}</i><span>Lienket<small>Studio</small></span></a>
+  <nav aria-label="Lienket Studio"><span class="grp">Vận hành</span>${l('#/app','Tổng quan','home')}${l('#/app/review','Duyệt deal','review',c.review)}${l('#/app/schedule/fbpage','Lịch đăng','schedule',c.todo)}${l('#/app/matching','Ghép sản phẩm','matching',c.match)}
+  <span class="grp">Phân tích</span>${l('#/app/performance','Thống kê','perf')}${l('#/app/links','Liên kết','links')}
+  <span class="grp">Hệ thống</span>${l('#/app/accounts','Tài khoản liên kết','accounts',acctAlerts())}${l('#/app/sources','Kết nối và nguồn','sources')}${l('#/app/settings','Cài đặt','settings')}</nav>
+  <div class="sidefoot"><a class="sitelink" href="#/">${ico('globe',16)}<span>Về trang chủ</span>${ico('arrow',14)}</a>
+  <a class="me" href="#/app/settings/billing" style="text-decoration:none"><span class="avatar">${esc(ME().ws.split(' ').slice(0,2).map(x=>x[0]).join('').toUpperCase())}</span><div><b>${esc(ME().ws)}</b><span>Gói ${S.plans[ME().plan].name}</span></div></a></div></aside>
   <div class="mainwrap"><header class="topbar"><div class="crumb"><span class="muted">Lienket Studio</span><span class="sep">/</span><b>${TITLES[active]}</b></div>
   <div class="search">${ico('search',16)}<input type="search" id="q" placeholder="Tìm sản phẩm, deal…" autocomplete="off" aria-label="Tìm sản phẩm"><kbd>/</kbd><div class="qres" id="qres" role="listbox"></div></div>
   ${bellBtn()}${meMenu(false)}</header>
@@ -638,24 +674,24 @@ function vHome(){
   const ready=S.queue.filter(q=>q.st==='ready');
   const g=ready.filter(q=>q.ch==='fbgroup').length,t=ready.filter(q=>q.ch==='tiktok').length;
   const todo=[
-    [c.review,'Deal chờ duyệt','Shopee và TikTok Shop, đã qua bộ lọc','#/review','var(--accent-bg)','var(--accent-ink)',ico('tag')],
-    [t,'Gói video TikTok cần đăng','Mở TikTok, gắn giỏ hàng, đăng, rồi bấm "Đã đăng"','#/schedule/tiktok','var(--tiktok-bg)','var(--tiktok)',ico('video')],
-    [g,'Bài soạn sẵn cho Facebook Group','Sao chép, dán vào Group, rồi bấm "Đã đăng"','#/schedule/fbgroup','var(--fb-bg)','var(--fb)',ico('users')],
-    [c.match,'Gợi ý ghép sản phẩm cần xác nhận','Shopee ↔ TikTok Shop','#/matching','var(--warn-bg)','var(--warn)',ico('matching')]
+    [c.review,'Deal chờ duyệt','Shopee và TikTok Shop, đã qua bộ lọc','#/app/review','var(--accent-bg)','var(--accent-ink)',ico('tag')],
+    [t,'Gói video TikTok cần đăng','Mở TikTok, gắn giỏ hàng, đăng, rồi bấm "Đã đăng"','#/app/schedule/tiktok','var(--tiktok-bg)','var(--tiktok)',ico('video')],
+    [g,'Bài soạn sẵn cho Facebook Group','Sao chép, dán vào Group, rồi bấm "Đã đăng"','#/app/schedule/fbgroup','var(--fb-bg)','var(--fb)',ico('users')],
+    [c.match,'Gợi ý ghép sản phẩm cần xác nhận','Shopee ↔ TikTok Shop','#/app/matching','var(--warn-bg)','var(--warn)',ico('matching')]
   ].filter(x=>x[0]>0).map(x=>`<a class="todo" href="${x[3]}"><span class="ic" style="background:${x[4]};color:${x[5]}">${x[6]}</span><div style="flex:1;min-width:0"><b>${x[0]} ${x[1]}</b><div class="small muted">${x[2]}</div></div><span class="go">Xử lý</span></a>`).join('')||'<div class="muted pad">Không còn việc nào cần bạn xử lý. Hệ thống đang tự chạy.</div>';
   const sched=S.queue.filter(q=>q.ch==='fbpage');
   return shell('home',`<div class="head"><div><h1>Tổng quan</h1><div class="sub">Thứ Năm, 22/10. Ngách ${esc(S.sys.general.niches.filter(n=>n.on).map(n=>n.n).join(', ')||'chưa chọn')}</div></div>${bell()}</div>${pausedBanner()}
   <div class="kpis">
-  <a class="kpi" href="#/review"><div class="kh"><span>Deal chờ duyệt</span><span class="ki">${ico('tag',16)}</span></div><b>${c.review}</b>${spark([2,4,3,5,3,6,4,5,7,4,3,5,1,3],'Deal mới 14 ngày')}<span class="delta up">+2 so với hôm qua</span></a>
-  <a class="kpi" href="#/schedule/fbpage"><div class="kh"><span>Facebook Page hôm nay</span><span class="ki">${ico('send',16)}</span></div><b>${S.postedFbToday}<small> / ${S.settings.capFb} bài</small></b><div class="ksp" style="height:22px"></div><div class="bar"><i style="width:${Math.min(100,S.postedFbToday/S.settings.capFb*100)}%"></i></div></a>
-  <a class="kpi" href="#/schedule/tiktok"><div class="kh"><span>Việc cần bạn làm</span><span class="ki warn">${ico('todo',16)}</span></div><b>${c.todo+c.match}</b><div class="ksp" style="height:40px"></div><span class="delta">${c.todo+c.match?'Bài TikTok, Group, ghép sản phẩm':'Đã xong hết'}</span></a>
-  <a class="kpi" href="#/performance"><div class="kh"><span>Hoa hồng 14 ngày</span><span class="ki">${ico('perf',16)}</span></div><b>${vnd(series(14,105).reduce((t,o)=>t+o.comm,0))}</b>${spark(series(14,105).map(o=>o.comm),'Hoa hồng 14 ngày',1)}<span class="delta up">18% so với 14 ngày trước</span></a></div>
+  <a class="kpi" href="#/app/review"><div class="kh"><span>Deal chờ duyệt</span><span class="ki">${ico('tag',16)}</span></div><b>${c.review}</b>${spark([2,4,3,5,3,6,4,5,7,4,3,5,1,3],'Deal mới 14 ngày')}<span class="delta up">+2 so với hôm qua</span></a>
+  <a class="kpi" href="#/app/schedule/fbpage"><div class="kh"><span>Facebook Page hôm nay</span><span class="ki">${ico('send',16)}</span></div><b>${S.postedFbToday}<small> / ${S.settings.capFb} bài</small></b><div class="ksp" style="height:22px"></div><div class="bar"><i style="width:${Math.min(100,S.postedFbToday/S.settings.capFb*100)}%"></i></div></a>
+  <a class="kpi" href="#/app/schedule/tiktok"><div class="kh"><span>Việc cần bạn làm</span><span class="ki warn">${ico('todo',16)}</span></div><b>${c.todo+c.match}</b><div class="ksp" style="height:40px"></div><span class="delta">${c.todo+c.match?'Bài TikTok, Group, ghép sản phẩm':'Đã xong hết'}</span></a>
+  <a class="kpi" href="#/app/performance"><div class="kh"><span>Hoa hồng 14 ngày</span><span class="ki">${ico('perf',16)}</span></div><b>${vnd(series(14,105).reduce((t,o)=>t+o.comm,0))}</b>${spark(series(14,105).map(o=>o.comm),'Hoa hồng 14 ngày',1)}<span class="delta up">18% so với 14 ngày trước</span></a></div>
   <div class="row" style="align-items:flex-start;gap:16px">
    <section class="card pad" style="flex:2 1 460px"><h2 style="font-size:17px;margin-bottom:6px">Việc cần bạn làm hôm nay</h2>${todo}</section>
    <section class="card pad" style="flex:1 1 280px;display:flex;flex-direction:column;gap:8px"><h2 style="font-size:17px">Facebook Page tự động</h2>
    ${sched.map(q=>`<div class="row between small" style="border-top:1px solid var(--line2);padding-top:8px"><span><b>${q.time}</b> ${esc(D(q.deal).name)}</span><span class="badge ${q.st==='posted'?'ok':''}">${q.st==='posted'?'Đã đăng':'Đã lên lịch'}</span></div>`).join('')}
-   <a href="#/schedule/fbpage" class="small" style="font-weight:500">Xem lịch đăng</a></section></div>
-  <section class="card pad row between"><div class="small"><b>Nguồn dữ liệu:</b> AccessTrade (Shopee, TikTok Shop) quét 10:40 · Shopee Open API 10:41 · Facebook Page đã kết nối · TikTok: ${S.conn.tiktokUpload?'đẩy vào hộp thư':'tải video về điện thoại'}</div><a class="btn sm" href="#/sources">Kết nối và nguồn</a></section>`);
+   <a href="#/app/schedule/fbpage" class="small" style="font-weight:500">Xem lịch đăng</a></section></div>
+  <section class="card pad row between"><div class="small"><b>Nguồn dữ liệu:</b> AccessTrade (Shopee, TikTok Shop) quét 10:40 · Shopee Open API 10:41 · Facebook Page đã kết nối · TikTok: ${S.conn.tiktokUpload?'đẩy vào hộp thư':'tải video về điện thoại'}</div><a class="btn sm" href="#/app/sources">Kết nối và nguồn</a></section>`);
 }
 
 function vReview(){
@@ -682,7 +718,7 @@ function vReview(){
 function vSchedule(tab){
   tab=tab||'fbpage';
   const q=S.queue.filter(x=>x.ch===tab);
-  const tabs=['fbpage','fbgroup','tiktok'].map(k=>{const n=S.queue.filter(x=>x.ch===k&&x.st==='ready').length;return `<a class="chip ${tab===k?'on':''}" href="#/schedule/${k}" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">${CH[k][0]}${n?` <span class="cnt">${n}</span>`:''}</a>`}).join('');
+  const tabs=['fbpage','fbgroup','tiktok'].map(k=>{const n=S.queue.filter(x=>x.ch===k&&x.st==='ready').length;return `<a class="chip ${tab===k?'on':''}" href="#/app/schedule/${k}" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">${CH[k][0]}${n?` <span class="cnt">${n}</span>`:''}</a>`}).join('');
   let body='';
   if(tab==='fbpage'){
     const items=[...q].sort((a,b)=>a.time.localeCompare(b.time));
@@ -816,7 +852,7 @@ function vPerf(tab){
   const sum=(a,k)=>a.reduce((s,o)=>s+o[k],0);
   const C=sum(data,'clicks'),O=sum(data,'orders'),M=sum(data,'comm'),pC=sum(prev,'clicks'),pO=sum(prev,'orders'),pM=sum(prev,'comm');
   const pct=(a,b)=>{const v=Math.round((a-b)/b*100);return `<span class="delta ${v>=0?'up':'down'}">${v>=0?'':'↓ '}${Math.abs(v)}% so với ${days} ngày trước</span>`};
-  const tabs=`<div class="seg" role="tablist">${[['revenue','Doanh thu và đơn'],['posts','Bài đăng và kênh'],['filter','Bộ lọc deal']].map(([k,t])=>`<a class="chip ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" href="#/performance/${k}" style="display:inline-flex;align-items:center;text-decoration:none">${t}</a>`).join('')}</div>`;
+  const tabs=`<div class="seg" role="tablist">${[['revenue','Doanh thu và đơn'],['posts','Bài đăng và kênh'],['filter','Bộ lọc deal']].map(([k,t])=>`<a class="chip ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" href="#/app/performance/${k}" style="display:inline-flex;align-items:center;text-decoration:none">${t}</a>`).join('')}</div>`;
   const ranges=`<div class="seg" role="group" aria-label="Khoảng thời gian">${[7,30,90].map(r=>`<button type="button" class="chip ${RANGE===r?'on':''}" data-range="${r}" aria-pressed="${RANGE===r}">${r} ngày</button>`).join('')}</div>`;
   const head=`<div class="head"><div><h1>Thống kê</h1><div class="sub">Đơn và hoa hồng lấy từ báo cáo AccessTrade và Shopee, lượt xem TikTok từ Display API</div></div><div class="row">${ranges}<button class="btn sm" type="button" data-export>Xuất báo cáo</button></div></div>${tabs}`;
   const note=`<p class="small muted" style="margin:0">Số liệu mẫu để minh họa bố cục. Hoa hồng "chờ duyệt" có thể bị sàn hủy nếu khách trả hàng.</p>`;
@@ -828,7 +864,7 @@ function vPerf(tab){
     body=`<div class="kpis">
     <div class="kpi"><div class="kh"><span>Hoa hồng</span><span class="ki">${ico('tag',16)}</span></div><b>${vnd(M)}</b>${pct(M,pM)}</div>
     <div class="kpi"><div class="kh"><span>Đơn hàng</span><span class="ki">${ico('box',16)}</span></div><b>${n0(O)}</b>${pct(O,pO)}</div>
-    <a class="kpi" href="#/links"><div class="kh"><span>Lượt bấm link</span><span class="ki">${ico('send',16)}</span></div><b>${n0(C)}</b>${pct(C,pC)}</a>
+    <a class="kpi" href="#/app/links"><div class="kh"><span>Lượt bấm link</span><span class="ki">${ico('send',16)}</span></div><b>${n0(C)}</b>${pct(C,pC)}</a>
     <div class="kpi"><div class="kh"><span>Tỷ lệ chuyển đổi</span><span class="ki">${ico('perf',16)}</span></div><b>${cr.toLocaleString('vi-VN',{maximumFractionDigits:1})}%</b><span class="delta">Đơn / lượt bấm</span></div></div>
     <section class="card pad"><div class="row between"><div><h2 style="font-size:17px">Hoa hồng theo ngày</h2><div class="small muted">${days} ngày gần nhất · rê chuột để xem từng ngày</div></div>
     <div class="split"><div><span class="small muted">Đã duyệt</span><b>${vnd(M*.62)}</b></div><div><span class="small muted">Chờ duyệt</span><b>${vnd(M*.38)}</b></div></div></div>
@@ -867,7 +903,7 @@ function vPerf(tab){
     <div class="kpi"><div class="kh"><span>Deal vào hàng duyệt</span><span class="ki">${ico('review',16)}</span></div><b>${n0(fun[4][1])}</b><span class="delta">≈ ${(fun[4][1]/days).toLocaleString('vi-VN',{maximumFractionDigits:1})} deal mỗi ngày</span></div>
     <div class="kpi"><div class="kh"><span>Tỷ lệ bạn duyệt</span><span class="ki">${ico('todo',16)}</span></div><b>${Math.round(fun[5][1]/fun[4][1]*100)}%</b><span class="delta">Cao và ổn định thì có thể tắt duyệt tay</span></div>
     <div class="kpi"><div class="kh"><span>Bắt được giảm ảo</span><span class="ki warn">${ico('tag',16)}</span></div><b>${n0(fun[0][1]-fun[1][1])}</b><span class="delta">Không bao giờ được đăng</span></div></div>
-    <section class="card pad"><div class="row between" style="margin-bottom:6px"><div><h2 style="font-size:17px">Phễu lọc deal</h2><div class="small muted">Từ ${n0(scanned)} sản phẩm theo dõi, ${days} ngày qua. Mỗi dòng là số sản phẩm còn lại sau vòng lọc đó.</div></div><a class="btn sm" href="#/settings/filter">Chỉnh bộ lọc</a></div>
+    <section class="card pad"><div class="row between" style="margin-bottom:6px"><div><h2 style="font-size:17px">Phễu lọc deal</h2><div class="small muted">Từ ${n0(scanned)} sản phẩm theo dõi, ${days} ngày qua. Mỗi dòng là số sản phẩm còn lại sau vòng lọc đó.</div></div><a class="btn sm" href="#/app/settings/filter">Chỉnh bộ lọc</a></div>
     <div class="funnel">${fun.map((f,i)=>{const pv=i?fun[i-1][1]:null;return `<div class="fr" data-tip="${n0(f[1])} sản phẩm" data-tipl="${esc(f[0])}"><span class="fn">${i+1}</span><div class="fbar"><div class="fl"><span>${f[0]}</span><b>${n0(f[1])}</b></div><div class="hbt"><i style="width:${Math.max(1.5,f[1]/fun[0][1]*100)}%;${i>=4?'background:var(--accent)':''}"></i></div></div><span class="fp">${pv?'giữ '+Math.round(f[1]/pv*100)+'%':''}</span></div>`}).join('')}</div>
     <p class="small muted" style="margin:10px 0 0">Vòng 1 loại phần lớn: ${n0(scanned-fun[0][1])} sản phẩm (${Math.round((scanned-fun[0][1])/scanned*100)}%) không giảm đủ sâu.</p></section>
     <div class="row" style="align-items:stretch;gap:16px">
@@ -882,7 +918,7 @@ function acctAlerts(){const A=S.acct;return ['meta','tiktok','ttshop','shopee','
 function vSources(){
   const c=(name,status,cls,lines,btn)=>`<section class="card pad" style="display:flex;flex-direction:column;gap:6px"><div class="row between"><h2 style="font-size:16px">${name}</h2><span class="badge ${cls}">${status}</span></div>${lines.map(l=>`<div class="small" style="color:var(--ink2)">${l}</div>`).join('')}${btn||''}</section>`;
   return shell('sources',`<div class="head"><div><h1>Kết nối và nguồn</h1><div class="sub">Chỉ dùng API chính thức; khóa lưu trong biến môi trường trên máy chủ</div></div>${bell()}</div>
-  <div class="row between"><h2 style="font-size:15px" class="muted">Nguồn dữ liệu</h2><a class="btn sm" href="#/accounts">Quản lý tài khoản liên kết</a></div>
+  <div class="row between"><h2 style="font-size:15px" class="muted">Nguồn dữ liệu</h2><a class="btn sm" href="#/app/accounts">Quản lý tài khoản liên kết</a></div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
   ${c('AccessTrade','Đã kết nối','ok',['Shopee: datafeed, coupon, top bán chạy','TikTok Shop: <code>/v2/tiktokshop_product_feeds</code>, tạo link','Giới hạn 18 / 30 request mỗi phút','Quét gần nhất 10:40'])}
   ${c('Shopee Open API','Đã kết nối','ok',['<code>productOfferV2</code>, link rút gọn, báo cáo chuyển đổi','Quét gần nhất 10:41'])}</div>
@@ -899,7 +935,7 @@ function vSources(){
   <tr><td><b>Datafeed</b></td><td class="small">Tìm sản phẩm mới</td><td>Hằng ngày 02:00</td></tr></tbody></table></section>`);
 }
 
-function pausedBanner(){return S.sys.system.paused?`<div class="banner"><span><b>Đã tạm dừng toàn bộ đăng bài.</b> Hệ thống vẫn quét giá nhưng không đăng lên Facebook và không tạo gói TikTok.</span><a class="btn sm" href="#/settings/system">Mở lại trong Cài đặt</a></div>`:''}
+function pausedBanner(){return S.sys.system.paused?`<div class="banner"><span><b>Đã tạm dừng toàn bộ đăng bài.</b> Hệ thống vẫn quét giá nhưng không đăng lên Facebook và không tạo gói TikTok.</span><a class="btn sm" href="#/app/settings/system">Mở lại trong Cài đặt</a></div>`:''}
 const STABS=[['general','Chung'],['appearance','Giao diện'],['filter','Bộ lọc và đăng bài'],['scan','Lịch quét và API'],['notify','Thông báo'],['users','Thành viên'],['billing','Gói và thanh toán'],['system','Tạm dừng và dữ liệu']];
 const ROLES={owner:['Chủ hệ thống','Toàn quyền, kể cả khóa API và người dùng'],editor:['Biên tập','Duyệt deal, đăng bài, sửa bộ lọc'],viewer:['Chỉ xem','Xem tổng quan và hiệu quả']};
 let dangerArm=null;let CURTHEME='grayorange';
@@ -908,7 +944,7 @@ function vSettings(tab){
   tab=tab==='__accounts'||STABS.some(t=>t[0]===tab)?tab:'general';
   const sec=(title,inner,sub,cls)=>`<section class="card pad ${cls||''}" style="display:flex;flex-direction:column;gap:12px"><div><h2 style="font-size:17px">${title}</h2>${sub?`<div class="small muted" style="margin-top:2px">${sub}</div>`:''}</div>${inner}</section>`;
   const grid=x=>`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">${x}</div>`;
-  const tabs=`<div class="stabs seg" role="tablist" aria-label="Nhóm cài đặt">${STABS.map(([k,t])=>`<a class="chip ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" href="#/settings/${k}" style="display:inline-flex;align-items:center;text-decoration:none">${t}</a>`).join('')}</div>`;
+  const tabs=`<div class="stabs seg" role="tablist" aria-label="Nhóm cài đặt">${STABS.map(([k,t])=>`<a class="chip ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" href="#/app/settings/${k}" style="display:inline-flex;align-items:center;text-decoration:none">${t}</a>`).join('')}</div>`;
   const head=(sub,btn)=>`<div class="head"><div><h1>Cài đặt</h1><div class="sub">${sub}</div></div>${btn===false?'':`<button class="btn pri" type="submit">Lưu thay đổi</button>`}</div>${tabs}`;
   /* field helpers for generic forms (group = key in S.sys) */
   const G=(g)=>S.sys[g];
@@ -999,7 +1035,7 @@ function vSettings(tab){
     const k=(name,val,st,cls,note)=>`<div><b>${name}</b><div class="small muted">${note}</div></div><div><code style="font-weight:500">${val}</code></div><div class="row" style="gap:6px;justify-content:flex-end"><span class="badge ${cls}">${st}</span><button class="btn sm" type="button" data-testkey="${name}">Kiểm tra</button><button class="btn sm" type="button" data-rotate="${name}">Thay</button></div>`;
     return shell('settings',`<div style="display:flex;flex-direction:column;gap:18px;max-width:980px">${head('Khóa của ứng dụng Lienket Studio trên Meta, TikTok, Shopee',false)}
     <div class="card pad small" style="background:var(--soft)">Khóa được lưu trong biến môi trường trên máy chủ, giao diện chỉ hiện 4 ký tự cuối. Không ai, kể cả chủ hệ thống, xem lại được khóa đầy đủ sau khi lưu.</div>
-    <div class="card pad small">Đây là khóa của <b>ứng dụng</b> bạn đăng ký trên trang nhà phát triển của từng nền tảng, chỉ nhập một lần. Tài khoản Facebook, TikTok, Shopee của bạn được kết nối ở tab <a href="#/accounts">Tài khoản liên kết</a>.</div>
+    <div class="card pad small">Đây là khóa của <b>ứng dụng</b> bạn đăng ký trên trang nhà phát triển của từng nền tảng, chỉ nhập một lần. Tài khoản Facebook, TikTok, Shopee của bạn được kết nối ở tab <a href="#/app/accounts">Tài khoản liên kết</a>.</div>
     ${sec('Ứng dụng',`<div class="kv">${k('Meta App','App ID 8xxxx, secret ••••a71c','Chế độ phát triển','warn','developers.facebook.com, cần App Review để dùng cho người khác')}${k('TikTok App','Client key ••••77ae',S.conn.tiktokUpload?'Đã duyệt video.upload':'Chưa duyệt video.upload',S.conn.tiktokUpload?'ok':'warn','developers.tiktok.com, Login Kit và Content Posting API')}${k('Shopee Open API','App ID 1xxxx, secret ••••c21e','Hoạt động','ok','Shopee Affiliate Open Platform, ký SHA256')}</div>`)}
     ${sec('Viết nội dung bằng AI',`<div class="kv">${k('Khóa AI','••••e4d1','Hoạt động','ok','Dùng để viết câu mô tả ngắn cho bài')}</div>`)}
     ${sec('Mã theo dõi (subId)',`<table><thead><tr><th>Kênh</th><th>subId gắn vào link</th></tr></thead><tbody><tr><td><span class="badge fb">Facebook Page</span></td><td><code>lk_fbpage</code></td></tr><tr><td><span class="badge fb">Facebook Group</span></td><td><code>lk_fbgroup</code></td></tr><tr><td><span class="badge tt">TikTok</span></td><td><code>lk_tiktok</code></td></tr><tr><td><span class="badge">Trang so sánh giá</span></td><td><code>lk_site</code></td></tr></tbody></table>`,'Dùng để tách đơn hàng theo kênh ở màn hình Thống kê.')}</div>`);
@@ -1090,12 +1126,44 @@ function ensureSaas(){
   if(!S.links)S.links=initialLinks();
 }
 const CUS=id=>S.customers.find(c=>c.id===id);
-const ME=()=>CUS(S.session.imp||'c01');
+const ME=()=>CUS(S.session.imp||S.session.uid||'c01');
 function audit(act,target,kind){S.audit.unshift({t:'22/10 '+new Date().toTimeString().slice(0,5),actor:'[Quản trị viên]',act,target:target||'—',ip:'113.161.x.x',kind:kind||'admin'})}
 const money=v=>v?vnd(v):'Miễn phí';
 
 /* =================== Đăng nhập =================== */
 let LOGIN_STEP='pw',LOGIN_NOTE='',LOGIN_EMAIL='';
+let SIGNUP={name:'',email:'',ws:'',err:{}};
+function vSignup(){
+  const f=SIGNUP,e=f.err;
+  const closed=!S.platform.signup?`<div class="banner"><span><b>Tạm ngừng nhận đăng ký mới.</b> Vui lòng quay lại sau.</span></div>`:'';
+  return `<div class="auth"><div class="auth-card"><a class="logo" href="#/" style="margin-bottom:6px"><i>${CHECK}</i><span>Lienket<small>Studio</small></span></a>
+    <h1>Tạo tài khoản</h1><p class="muted" style="margin:0">Dùng thử ${S.platform.trialDays} ngày gói Chuyên nghiệp, không cần nhập thẻ.</p>${closed}
+    <label class="f">Họ và tên<input type="text" id="sg_name" autocomplete="name" value="${esc(f.name)}"><span class="err">${e.name||''}</span></label>
+    <label class="f">Email<input type="email" id="sg_email" autocomplete="email" value="${esc(f.email)}"><span class="err">${e.email||''}</span></label>
+    <label class="f">Mật khẩu<input type="password" id="sg_pw" autocomplete="new-password"><span class="small muted" style="font-weight:400">Ít nhất 8 ký tự</span><span class="err">${e.pw||''}</span></label>
+    <label class="f">Tên kênh hoặc workspace<input type="text" id="sg_ws" placeholder="Ví dụ: Săn deal tai nghe" value="${esc(f.ws)}"><span class="err">${e.ws||''}</span></label>
+    <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px"><input type="checkbox" id="sg_terms" style="margin-top:3px"><span>Tôi đồng ý với <a href="#" data-out="Điều khoản sử dụng">Điều khoản sử dụng</a> và <a href="#" data-out="Chính sách bảo mật">Chính sách bảo mật</a></span></label><span class="err" style="margin-top:-10px">${e.terms||''}</span>
+    <button class="btn pri" type="button" data-signupgo style="width:100%" ${S.platform.signup?'':'disabled'}>Tạo tài khoản</button>
+    <div class="or"><span>hoặc</span></div>
+    <button class="btn" type="button" data-loginsso style="width:100%">Đăng ký bằng tài khoản Google</button>
+    <p class="small muted" style="margin:0;text-align:center">Đã có tài khoản? <a class="linkbtn" href="#/login">Đăng nhập</a></p></div></div>`;
+}
+function doSignup(){
+  const v=id=>document.getElementById(id).value.trim();
+  SIGNUP={name:v('sg_name'),email:v('sg_email'),ws:v('sg_ws'),err:{}};const e=SIGNUP.err;
+  if(!SIGNUP.name)e.name='Nhập họ và tên';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(SIGNUP.email))e.email='Email chưa đúng định dạng';
+  else if(S.customers.some(c=>c.email.toLowerCase()===SIGNUP.email.toLowerCase())||/^admin/i.test(SIGNUP.email))e.email='Email này đã có tài khoản. Đăng nhập thay vì đăng ký.';
+  if(document.getElementById('sg_pw').value.length<8)e.pw='Mật khẩu có ít nhất 8 ký tự';
+  if(!SIGNUP.ws)e.ws='Đặt tên cho kênh hoặc workspace';
+  if(!document.getElementById('sg_terms').checked)e.terms='Cần đồng ý điều khoản để tạo tài khoản';
+  if(Object.keys(e).length){rerender();return}
+  const id='c'+String(S.customers.length+1).padStart(2,'0');
+  const d=new Date(2026,9,22+S.platform.trialDays),end=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+  S.customers.unshift({id,name:SIGNUP.name,ws:SIGNUP.ws,email:SIGNUP.email,plan:'pro',status:'trial',joined:'22/10/2026',last:'vừa xong',trialEnd:end,use:{products:0,pages:0,links:0,members:1},fb:false,tt:false,sp:false});
+  S.session={role:'customer',imp:null,uid:id};SIGNUP={name:'',email:'',ws:'',err:{}};save();go('/app');
+  toast((S.platform.verifyEmail?'Đã gửi email xác minh. ':'')+'Bạn được dùng thử '+S.platform.trialDays+' ngày gói Chuyên nghiệp');
+}
 function vLogin(){
   const note=LOGIN_NOTE?`<div class="banner" role="alert" style="margin-bottom:4px"><span>${esc(LOGIN_NOTE)}</span></div>`:'';
   const maint=S.platform.maintenance?`<div class="banner" style="margin-bottom:4px"><span><b>Hệ thống đang bảo trì.</b> Khách hàng tạm thời không đăng nhập được, quản trị viên vẫn vào được.</span></div>`:'';
@@ -1112,9 +1180,9 @@ function vLogin(){
     <button class="btn pri" type="button" data-login style="width:100%">Đăng nhập</button>
     <div class="or"><span>hoặc</span></div>
     <button class="btn" type="button" data-loginsso style="width:100%">Đăng nhập bằng tài khoản Google</button>
-    <p class="small muted" style="margin:0;text-align:center">Chưa có tài khoản? <button type="button" class="linkbtn" data-signup>Dùng thử ${S.platform.trialDays} ngày miễn phí</button></p>
+    <p class="small muted" style="margin:0;text-align:center">Chưa có tài khoản? <a class="linkbtn" href="#/signup">Đăng ký, dùng thử ${S.platform.trialDays} ngày miễn phí</a></p>
     <div class="demo"><span class="small muted">Bản dùng thử: đăng nhập nhanh</span><div class="row" style="gap:8px"><button class="btn sm" type="button" data-quick="customer">Khách hàng</button><button class="btn sm" type="button" data-quick="admin">Quản trị viên</button></div><span class="small muted">Email bắt đầu bằng <code>admin</code> sẽ vào khu quản trị.</span></div>`;
-  return `<div class="auth"><div class="auth-card"><a class="logo" href="#/login" style="margin-bottom:6px"><i>${CHECK}</i><span>Lienket<small>Studio</small></span></a>${body}</div></div>`;
+  return `<div class="auth"><div class="auth-card"><a class="logo" href="#/" style="margin-bottom:6px"><i>${CHECK}</i><span>Lienket<small>Studio</small></span></a>${body}</div></div>`;
 }
 function doLogin(){
   const em=document.getElementById('l_email'),pw=document.getElementById('l_pw');let ok=true;
@@ -1125,11 +1193,11 @@ function doLogin(){
   LOGIN_EMAIL=ev;
   if(/^admin/i.test(ev)){LOGIN_STEP='2fa';rerender();setTimeout(()=>{const c=document.getElementById('l_code');if(c)c.focus()},0);return}
   if(S.platform.maintenance){LOGIN_NOTE='Hệ thống đang bảo trì, vui lòng quay lại sau.';rerender();return}
-  S.session={role:'customer',imp:null};LOGIN_NOTE='';save();go('/');toast('Đã đăng nhập');
+  S.session={role:'customer',imp:null};LOGIN_NOTE='';save();go('/app');toast('Đã đăng nhập');
 }
 function do2fa(){const v=document.getElementById('l_code').value.trim();if(!/^\d{6}$/.test(v)){document.getElementById('e_l_code').textContent='Mã gồm đúng 6 chữ số';return}
   S.session={role:'admin',imp:null};LOGIN_STEP='pw';LOGIN_NOTE='';audit('Đăng nhập, xác minh 2 lớp thành công','—','sec');save();go('/admin');toast('Đã đăng nhập khu quản trị')}
-function logout(){const wasAdmin=S.session.role==='admin';S.session={role:null,imp:null};LOGIN_STEP='pw';LOGIN_EMAIL='';LOGIN_NOTE='';if(wasAdmin)audit('Đăng xuất','—','sec');save();go('/login');toast('Đã đăng xuất')}
+function logout(){const wasAdmin=S.session.role==='admin';S.session={role:null,imp:null};LOGIN_STEP='pw';LOGIN_EMAIL='';LOGIN_NOTE='';if(wasAdmin)audit('Đăng xuất','—','sec');save();go('/');toast('Đã đăng xuất')}
 
 /* menu tài khoản (góc phải) */
 function meMenu(admin){
@@ -1138,7 +1206,7 @@ function meMenu(admin){
   const init=admin?'QT':who.n.split(' ').filter(Boolean).slice(-2).map(x=>x[0]).join('').toUpperCase();
   return `<div class="memenu"><button class="avatar sm" type="button" data-me aria-expanded="false" aria-label="Tài khoản">${esc(init)}</button>
   <div class="panel mp" id="mepanel"><div class="phd" style="display:block"><b>${esc(who.n)}</b><div class="small muted">${esc(who.e)}</div><div class="small muted">${esc(who.r)}</div></div>
-  ${admin?'<a class="it" href="#/admin/settings">Cài đặt nền tảng</a>':'<a class="it" href="#/settings/billing">Gói và thanh toán</a><a class="it" href="#/settings/users">Thành viên</a>'}
+  ${admin?'<a class="it" href="#/admin/settings">Cài đặt nền tảng</a>':'<a class="it" href="#/app/settings/billing">Gói và thanh toán</a><a class="it" href="#/app/settings/users">Thành viên</a>'}
   <button class="it" type="button" data-logout>Đăng xuất</button></div></div>`;
 }
 
@@ -1367,21 +1435,73 @@ function chart(d){const h=d.history,min=Math.min(...h,d.avg30)*0.97,max=Math.max
 return `<svg viewBox="0 0 740 240" role="img" aria-label="Lịch sử giá 90 ngày" style="width:100%;height:auto;display:block;font-family:inherit"><line x1="56" x2="720" y1="${Y(d.avg30)}" y2="${Y(d.avg30)}" stroke="#8A8F96" stroke-dasharray="5 5"/><text x="62" y="${Y(d.avg30)+16}" font-size="12" fill="#3E434A">TB 30 ngày ${vnd(d.avg30)}</text>
 <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" points="${h.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ')}"/><circle cx="${X(hi)}" cy="${Y(h[hi])}" r="5" fill="#fff" stroke="#B4400F" stroke-width="2"/><text x="${X(hi)+10}" y="${Y(h[hi])-6}" font-size="12" fill="#9A3A0E">Đỉnh ${vnd(h[hi])}</text>
 <circle cx="${X(last)}" cy="${Y(h[last])}" r="6" fill="var(--accent)"/><text x="${X(last)-10}" y="${Y(h[last])-12}" text-anchor="end" font-size="12.5" font-weight="500" fill="#15171A">${vnd(h[last])}</text><text x="60" y="228" font-size="12" fill="#5B6068">90 ngày trước</text><text x="716" y="228" text-anchor="end" font-size="12" fill="#5B6068">Hôm nay</text></svg>`}
+/* ---------- trang so sánh giá (người mua): dán link Shopee hoặc tìm tên → chọn nơi so sánh → kết quả ---------- */
+let CMPQ='',CMPERR='',CMPT={tt:true,gg:true};
+const isUrl=v=>/^https?:\/\/|^www\.|\.(vn|com)\//i.test(v);
+const r1k=v=>Math.round(v/1000)*1000;
+function cmpData(d){
+  const srcK=d.offers.sp?'sp':'tt',otherK=srcK==='sp'?'tt':'sp',src=d.offers[srcK];
+  const o=d.offers[otherK];
+  const short=d.name.replace(/\s*\[.*\]\s*/,'').trim(),model=(d.name.match(/\[(.*)\]/)||[])[1]||'';
+  const tt=o?[
+    {conf:96,title:`${short} ${model} chính hãng`,shop:`[Shop ${PL[otherK]} 1]`,price:o.final,sold:'1,2k',note:'Trùng mã model và tên'},
+    {conf:71,title:`${short} ${model.replace('Model','Model')} bản Lite`,shop:`[Shop ${PL[otherK]} 2]`,price:r1k(o.final*0.82),sold:'640',note:'Cùng hãng, khác phiên bản'}
+  ]:[
+    {conf:64,title:`${short} cùng phân khúc`,shop:`[Shop ${PL[otherK]} 3]`,price:r1k(src.final*0.9),sold:'310',note:'Chỉ giống tên, khác mã model'},
+    {conf:58,title:`${short} loại phổ thông`,shop:`[Shop ${PL[otherK]} 4]`,price:r1k(src.final*0.7),sold:'2,1k',note:'Khác hãng'}
+  ];
+  const gg=[['Tiki','tiki.vn',1.04],['Lazada','lazada.vn',0.99],['CellphoneS','cellphones.com.vn',1.07],['Website hãng','[website hãng]',1.15]].map(([n,dom,k])=>({n,dom,price:r1k(src.final*k),title:`${short} ${model}`}));
+  return {srcK,otherK,src,tt,gg,short,model};
+}
+function cmpSearch(){const el=document.getElementById('cmpq');const v=el.value.trim();CMPERR='';
+  if(!v){CMPERR='Dán link Shopee hoặc gõ tên sản phẩm';rerender();document.getElementById('cmpq').focus();return}
+  if(isUrl(v)){if(/shopee\.vn|shp\.ee/i.test(v)){CMPQ=v;go('/site/a');toast('Đã đọc link Shopee');return}
+    CMPERR='Hiện chỉ đọc được link Shopee. Sản phẩm ở nơi khác thì gõ tên sản phẩm.';rerender();return}
+  CMPQ=v;go('/site')}
 function vSite(id){
-  const d=D(id)||D('a');const b=best(d);
-  const rows=Object.keys(d.offers).map(k=>({k,...d.offers[k]})).sort((x,y)=>x.final-y.final).map((o,i)=>`<tr class="${i===0?'best':''}"><td><span class="badge ${o.k}">${PL[o.k]}</span>${i===0?' <span class="badge ok">Rẻ hơn</span>':''}</td><td>${vnd(o.list)}</td><td>${o.coupon?'−'+vnd(o.coupon):'<span class="muted">Không có</span>'}</td><td><b>${vnd(o.final)}</b></td><td class="muted">${o.checked}</td><td style="text-align:right"><a href="#" data-out="${PL[o.k]}" style="font-weight:500">Xem trên ${PL[o.k]}</a></td></tr>`).join('');
-  const others=S.deals.filter(x=>x.id!==d.id&&x.status==='approved').map(x=>`<a href="#/site/${x.id}" class="card pad" style="text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px"><span class="badge ok" style="align-self:flex-start">${drop(x)}%</span><b>${esc(x.name)}</b><span style="color:var(--accent);font-weight:600">${vnd(best(x).final)}</span></a>`).join('');
-  return `<div class="sitebar"><div class="in"><b style="font-size:18px">[Tên kênh]</b><span class="muted small">So sánh giá Shopee và TikTok Shop</span><span style="flex:1"></span><a class="btn sm" href="#" data-out="Facebook">Theo dõi trên Facebook</a><a class="btn sm" href="#" data-out="TikTok">Theo dõi trên TikTok</a></div></div>
-  <main class="site"><section class="card" style="padding:22px;display:flex;flex-wrap:wrap;gap:28px"><div class="ph" style="flex:1 1 280px;max-width:360px;aspect-ratio:1/1;border-radius:6px">[Ảnh sản phẩm từ CDN của sàn]</div>
-  <div style="flex:999 1 380px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="row" style="gap:8px"><span class="badge ok">Deal thật · ${drop(d)}% so với TB 30 ngày</span>${pBadges(d)}</div>
-  <h1 style="font-size:26px;line-height:1.3">${esc(d.name)}: lịch sử giá, nơi bán rẻ nhất hôm nay</h1>
-  <div><div class="small muted">Giá cuối thấp nhất</div><div style="font-size:36px;font-weight:600;color:var(--accent);line-height:1.1">${vnd(b.final)}</div><div class="small">tại ${PL[b.k]} · kiểm tra lúc ${b.checked}</div></div>
-  <a class="btn pri" href="#" data-out="${PL[b.k]}" style="align-self:flex-start">Mua tại ${PL[b.k]} ↗</a>
-  <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></div></section>
-  <section class="card pad"><h2 style="font-size:19px;margin-bottom:10px">So sánh Shopee và TikTok Shop</h2><div class="tbl"><table style="min-width:620px"><thead><tr><th>Sàn</th><th>Giá niêm yết</th><th>Mã</th><th>Giá cuối</th><th>Cập nhật</th><th><span class="sr">Mua</span></th></tr></thead><tbody>${rows}</tbody></table></div></section>
-  <section class="card pad"><h2 style="font-size:19px;margin-bottom:10px">Lịch sử giá 90 ngày</h2>${chart(d)}</section>
-  ${others?`<section><h2 style="font-size:19px;margin-bottom:10px">Deal thật khác</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">${others}</div></section>`:''}
-  <p class="small muted" style="margin:0">Trang tĩnh, phát qua Cloudflare Pages. Ảnh sản phẩm tải từ CDN của sàn.</p></main>`;
+  const role=S.session.role;
+  const acct=role?`<a class="btn sm pri" href="${role==='admin'&&!S.session.imp?'#/admin':'#/app'}">${role==='admin'&&!S.session.imp?'Vào khu quản trị':'Vào trang quản lý'}</a><button class="btn sm" type="button" data-logout>Đăng xuất</button>`
+    :`<a class="btn sm" href="#/login">Đăng nhập</a><a class="btn sm pri" href="#/signup">Đăng ký</a>`;
+  const bar=`<div class="sitebar"><div class="in"><a class="logo" href="#/" style="color:var(--ink)"><i>${CHECK}</i><span>Lienket<small>So sánh giá</small></span></a><span style="flex:1"></span>${acct}</div></div>`;
+  const d=id?D(id):null;
+  const box=(val,big)=>`<div class="cmp-box ${big?'big':''}"><label class="sr" for="cmpq">Link Shopee hoặc tên sản phẩm</label>${ico('search',big?20:16)}<input type="search" id="cmpq" placeholder="Dán link sản phẩm Shopee hoặc gõ tên sản phẩm" value="${esc(val)}" autocomplete="off"><button class="btn pri" type="button" data-cmpgo>${big?'Tìm sản phẩm':'Tìm'}</button></div><div class="err" id="cmperr">${esc(CMPERR)}</div>`;
+  const chips=`<div class="cmp-targets"><span class="small muted">So sánh với</span>${[['tt','TikTok Shop'],['gg','Website khác qua Google']].map(([k,t])=>`<button type="button" class="tgt ${CMPT[k]?'on':''}" data-cmpt="${k}" aria-pressed="${CMPT[k]}"><span class="ck">${CMPT[k]?'✓':''}</span>${t}</button>`).join('')}</div>`;
+  /* bước 1 + 2: chưa chọn sản phẩm */
+  if(!d){
+    const q=CMPQ.trim(),nq=norm(q);
+    const res=q&&!isUrl(q)?S.deals.filter(x=>x.offers.sp&&norm(x.name).includes(nq)):[];
+    const list=q&&!isUrl(q)?(res.length?`<section class="card"><div class="pad" style="padding-bottom:6px"><h2 style="font-size:16px">Kết quả trên Shopee cho "${esc(q)}"</h2><div class="small muted">Chọn đúng sản phẩm bạn định mua</div></div>
+      ${res.map(x=>{const o=x.offers.sp;return `<button type="button" class="pick" data-cmppick="${x.id}">${thumb(x,48)}<span style="flex:1;min-width:0;text-align:left"><b style="font-weight:500">${esc(x.name)}</b><span class="small muted" style="display:block">[Tên shop Shopee] · đã bán 1,2k</span></span><b class="tnum">${vnd(o.final)}</b><span class="btn sm">So sánh</span></button>`}).join('')}</section>`
+      :`<div class="card pad small muted">Không tìm thấy "${esc(q)}" trên Shopee. Thử tên ngắn hơn, ví dụ chỉ tên hãng và mẫu.</div>`):'';
+    return bar+`<main class="site"><section class="cmp-hero"><h1>Mua ở đâu rẻ nhất?</h1><p class="muted" style="margin:0">Dán link sản phẩm Shopee hoặc gõ tên. Hệ thống tìm cùng sản phẩm trên TikTok Shop và các website khác để bạn so giá.</p><div class="cmp-q">${box(CMPQ,true)}${chips}</div>
+      <ol class="cmp-how"><li><b>Dán link hoặc gõ tên</b><span>Link dạng shopee.vn/… hoặc shp.ee/…</span></li><li><b>Chọn nơi so sánh</b><span>TikTok Shop, các website bán lẻ khác</span></li><li><b>Xem nơi rẻ nhất</b><span>Kèm lịch sử giá 90 ngày trên Shopee</span></li></ol></section>
+      ${list}
+      ${q?'':`<section><h2 style="font-size:16px;margin-bottom:10px">Đang được so sánh nhiều</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">${S.deals.filter(x=>x.offers.sp&&!x.flag).slice(0,4).map(x=>`<a href="#/site/${x.id}" class="card pad" style="text-decoration:none;color:var(--ink);display:flex;gap:10px;align-items:center">${thumb(x,40)}<span style="min-width:0"><b style="font-weight:500;display:block">${esc(x.name)}</b><span class="small muted">Shopee ${vnd(x.offers.sp.final)}</span></span></a>`).join('')}</div></section>`}
+      ${role?'':`<section class="card cta"><div><h2 style="font-size:17px">Bạn làm tiếp thị liên kết?</h2><p class="small muted" style="margin:4px 0 0">Lienket Studio tự tìm deal giảm giá thật trên Shopee và TikTok Shop, soạn bài và đăng lên Facebook, theo dõi hoa hồng ở một nơi.</p></div><div class="row" style="gap:8px"><a class="btn pri" href="#/signup">Dùng thử ${S.platform.trialDays} ngày miễn phí</a><a class="btn" href="#/login">Đăng nhập</a></div></section>`}
+      <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></main>`;
+  }
+  /* bước 3: kết quả */
+  const c=cmpData(d),src=c.src;
+  const ttSame=c.tt.filter(x=>x.conf>=90);
+  const cands=[{where:PL[c.srcK],price:src.final}].concat(CMPT.tt?ttSame.map(x=>({where:PL[c.otherK],price:x.price})):[]).concat(CMPT.gg?c.gg.map(x=>({where:x.n,price:x.price})):[]);
+  const cheapest=[...cands].sort((a,b)=>a.price-b.price)[0];
+  const save=src.final-cheapest.price;
+  const diff=p=>{const v=p-src.final;return v===0?'<span class="muted">bằng giá</span>':`<span class="${v<0?'cheaper':'dearer'}">${v<0?'rẻ hơn ':'đắt hơn '}${vnd(Math.abs(v))}</span>`};
+  const verdict=cheapest.where===PL[c.srcK]?`<div class="verdict same"><b>${PL[c.srcK]} đang rẻ nhất: ${vnd(src.final)}</b><span>Không nơi nào bạn chọn bán cùng sản phẩm rẻ hơn.</span></div>`
+    :`<div class="verdict"><b>Rẻ nhất ở ${cheapest.where}: ${vnd(cheapest.price)}</b><span>Rẻ hơn ${PL[c.srcK]} ${vnd(save)} (${Math.round(save/src.final*100)}%). Kiểm tra lại phí vận chuyển và mã giảm giá trước khi mua.</span></div>`;
+  const ttSec=CMPT.tt?`<section class="card"><div class="pad row between" style="padding-bottom:8px"><div><h2 style="font-size:16px">Trên ${PL[c.otherK]}</h2><div class="small muted">Ghép theo tên và mã model. Kiểm tra màu, phiên bản trước khi mua.</div></div></div>
+    ${ttSame.length?'':`<div class="small" style="padding:0 20px 10px;color:var(--warn)">Chưa tìm thấy đúng sản phẩm này trên ${PL[c.otherK]}. Dưới đây là sản phẩm gần giống.</div>`}
+    ${c.tt.map(x=>`<div class="mrow"><span class="badge ${x.conf>=90?'ok':''}">${x.conf>=90?'Cùng sản phẩm':'Gần giống'}</span><span style="flex:1;min-width:0"><b style="font-weight:500">${esc(x.title)}</b><span class="small muted" style="display:block">${x.shop} · đã bán ${x.sold} · ${x.note}</span></span><span class="mprice"><b class="tnum">${vnd(x.price)}</b>${x.conf>=90?diff(x.price):'<span class="muted small">khác sản phẩm</span>'}</span><a class="btn sm" href="#" data-out="${PL[c.otherK]}">Xem trên ${PL[c.otherK]}</a></div>`).join('')}</section>`:'';
+  const ggSec=CMPT.gg?`<section class="card"><div class="pad" style="padding-bottom:8px"><h2 style="font-size:16px">Trên các website khác</h2><div class="small muted">Tìm qua Google trong danh sách website bán lẻ đã chọn. Giá do website công bố, có thể đã đổi.</div></div>
+    ${c.gg.map(x=>`<div class="mrow"><span class="site-ic">${esc(x.n.charAt(0))}</span><span style="flex:1;min-width:0"><b style="font-weight:500">${esc(x.n)}</b><span class="small muted" style="display:block">${esc(x.title)} · ${esc(x.dom)}</span></span><span class="mprice"><b class="tnum">${vnd(x.price)}</b>${diff(x.price)}</span><a class="btn sm" href="#" data-out="${esc(x.n)}">Mở trang</a></div>`).join('')}
+    <div class="pad row between" style="border-top:1px solid var(--line2);padding-top:12px"><span class="small muted">Không thấy website bạn hay mua?</span><a class="btn sm" href="#" data-out="Google">Tìm "${esc(c.short)} ${esc(c.model)}" trên Google</a></div></section>`:'';
+  return bar+`<main class="site"><div class="cmp-q">${box(CMPQ||'https://shopee.vn/'+norm(d.name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-i.123456.789012',false)}${chips}</div>
+  <section class="card src"><div class="ph srcimg">[Ảnh]</div><div class="srcinfo"><div class="row" style="gap:6px"><span class="badge ${c.srcK}">${PL[c.srcK]}</span><span class="small muted">Sản phẩm bạn dán</span></div>
+    <h1 style="font-size:22px;line-height:1.3">${esc(d.name)}</h1><div class="small muted">[Tên shop ${PL[c.srcK]}] · ${src.coupon?'đã trừ mã '+vnd(src.coupon)+' · ':''}kiểm tra lúc ${src.checked}</div></div>
+    <div class="srcprice"><span class="small muted">Giá trên ${PL[c.srcK]}</span><b>${vnd(src.final)}</b><a class="btn sm" href="#" data-out="${PL[c.srcK]}">Mua trên ${PL[c.srcK]}</a></div></section>
+  ${verdict}${ttSec}${ggSec}
+  <section class="card pad"><h2 style="font-size:16px;margin-bottom:10px">Lịch sử giá 90 ngày trên ${PL[c.srcK]}</h2>${chart(d)}</section>
+  <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></main>`;
 }
 
 /* ---------- kết nối tài khoản (mô phỏng) ---------- */
@@ -1417,20 +1537,23 @@ function go(path){CUR=path||'/';dangerArm=null;try{history.replaceState(null,'',
 function route(){
   let p=(CUR||'/').split('/').filter(Boolean);const r=p[0]||'';let html,mode;
   const redirect=to=>{CUR=to;p=to.split('/').filter(Boolean);try{history.replaceState(null,'','#'+to)}catch(e){}};
-  if(r==='site'){mode='site';html=vSite(p[1])}
+  if(r===''||r==='site'){mode='site';html=vSite(p[1])}
   else if(r==='login'){mode='login';html=vLogin()}
+  else if(r==='signup'){mode='login';html=vSignup()}
   else if(r==='admin'){
     if(S.session.role!=='admin'){LOGIN_NOTE='Trang này chỉ dành cho quản trị viên. Đăng nhập bằng tài khoản quản trị để tiếp tục.';LOGIN_STEP='pw';redirect('/login');mode='login';html=vLogin()}
     else{mode='admin';html=adminView(p)}}
+  else if(r!=='app'){redirect('/');mode='site';html=vSite()}
   else{
-    if(!S.session.role){LOGIN_NOTE='';redirect('/login');mode='login';html=vLogin()}
+    p=p.slice(1);const r2=p[0]||'';
+    if(!S.session.role){LOGIN_NOTE='Đăng nhập để vào trang quản lý.';redirect('/login');mode='login';html=vLogin()}
     else if(S.session.role==='admin'&&!S.session.imp){redirect('/admin');mode='admin';html=adminView(['admin'])}
-    else{mode='customer';const v={review:vReview,matching:vMatching,performance:()=>vPerf(p[1]),sources:vSources,settings:()=>vSettings(p[1]),accounts:vAccounts,links:vLinks}[r];
-      html=r==='schedule'?vSchedule(p[1]):v?v():vHome()}}
+    else{mode='customer';const v={review:vReview,matching:vMatching,performance:()=>vPerf(p[1]),sources:vSources,settings:()=>vSettings(p[1]),accounts:vAccounts,links:vLinks}[r2];
+      html=r2==='schedule'?vSchedule(p[1]):v?v():vHome()}}
   const mb={customer:'m-admin',admin:'m-sa',login:'m-login',site:'m-site'};
   ['m-admin','m-sa','m-login','m-site'].forEach(id=>document.getElementById(id).classList.toggle('on',mb[mode]===id));
   document.getElementById('root').innerHTML=html;
-  document.title=({site:'Trang so sánh giá',login:'Đăng nhập',admin:'Quản trị',customer:'Lienket Studio'})[mode]+' – Mockup';
+  document.title=({site:'So sánh giá',login:'Đăng nhập',admin:'Quản trị',customer:'Lienket Studio'})[mode]+' – Mockup';
 }
 function rerender(){const y=scrollY;route();scrollTo(0,y)}
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1)||'/';if(h!==CUR){CUR=h;route();scrollTo(0,0)}});
@@ -1443,7 +1566,7 @@ function approve(id){
   const ch=S.chans[id]||{fbpage:true,fbgroup:true,tiktok:!!d.offers.tt};let n=0;
   if(ch.fbpage){const used=S.queue.filter(q=>q.ch==='fbpage').map(q=>q.time);const t=nextFb.find(x=>!used.includes(x))||'23:00';S.queue.push({id:S.nextId++,deal:id,ch:'fbpage',time:t,st:'scheduled'});n++}
   if(ch.fbgroup){S.queue.push({id:S.nextId++,deal:id,ch:'fbgroup',time:'—',st:'ready'});n++}
-  if(ch.tiktok&&d.offers.tt){S.queue.push({id:S.nextId++,deal:id,ch:'tiktok',time:'—',st:'ready'});S.notifs.unshift({id:Date.now(),t:'vừa xong',x:'Gói video TikTok cho '+d.name+' đã sẵn sàng',read:false,go:'#/schedule/tiktok'});n++}
+  if(ch.tiktok&&d.offers.tt){S.queue.push({id:S.nextId++,deal:id,ch:'tiktok',time:'—',st:'ready'});S.notifs.unshift({id:Date.now(),t:'vừa xong',x:'Gói video TikTok cho '+d.name+' đã sẵn sàng',read:false,go:'#/app/schedule/tiktok'});n++}
   d.status='approved';delete S.selected[id];return n;
 }
 function copy(text,msg){(navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject()).then(()=>toast(msg)).catch(()=>toast(msg+' (bản dùng thử)'))}
@@ -1466,10 +1589,14 @@ document.addEventListener('click',e=>{
   else if('dl' in ds){toast('Bản dùng thử: sẽ tải video về máy, rồi xóa khỏi máy chủ')}
   else if('inbox' in ds){toast('Bản dùng thử: video sẽ xuất hiện trong hộp thư TikTok của bạn')}
   else if(ds.match){S.matches.c=ds.match;save();rerender();if(ds.match!=='pending')toast(ds.match==='yes'?'Đã ghép, sẽ so giá hai sàn':'Đã từ chối gợi ý')}
+  else if('cmpgo' in ds){cmpSearch();return}
+  else if(ds.cmppick){CMPERR='';go('/site/'+ds.cmppick);return}
+  else if(ds.cmpt){const k=ds.cmpt;if(CMPT[k]&&!CMPT[k==='tt'?'gg':'tt']){toast('Chọn ít nhất một nơi để so sánh');return}CMPT[k]=!CMPT[k];rerender();return}
   else if(ds.out){e.preventDefault();toast('Bản dùng thử: link affiliate tới '+ds.out+' sẽ mở ở đây')}
-  else if(ds.demo){if(ds.demo==='admin'){S.session={role:'admin',imp:null};save();go('/admin')}else{S.session={role:'customer',imp:null};save();go('/')}return}
-  else if(ds.quick){LOGIN_EMAIL=ds.quick==='admin'?'admin@lienket.vn':'minhanh@example.com';if(ds.quick==='admin'){LOGIN_STEP='2fa';rerender();setTimeout(()=>{const c=document.getElementById('l_code');if(c)c.focus()},0)}else{S.session={role:'customer',imp:null};LOGIN_NOTE='';save();go('/');toast('Đã đăng nhập')}return}
+  else if(ds.demo){if(ds.demo==='admin'){S.session={role:'admin',imp:null};save();go('/admin')}else{S.session={role:'customer',imp:null};save();go('/app')}return}
+  else if(ds.quick){LOGIN_EMAIL=ds.quick==='admin'?'admin@lienket.vn':'minhanh@example.com';if(ds.quick==='admin'){LOGIN_STEP='2fa';rerender();setTimeout(()=>{const c=document.getElementById('l_code');if(c)c.focus()},0)}else{S.session={role:'customer',imp:null};LOGIN_NOTE='';save();go('/app');toast('Đã đăng nhập')}return}
   else if('login' in ds){doLogin();return}
+  else if('signupgo' in ds){doSignup();return}
   else if('l2fa' in ds){do2fa();return}
   else if('lback' in ds){LOGIN_STEP='pw';rerender();return}
   else if('forgot' in ds){toast('Bản dùng thử: sẽ gửi email đặt lại mật khẩu');return}
@@ -1488,7 +1615,7 @@ document.addEventListener('click',e=>{
   else if(ds.lock){const id=ds.lock;if(dangerArm!=='lock_'+id){dangerArm='lock_'+id;rerender();setTimeout(()=>{if(dangerArm==='lock_'+id){dangerArm=null;rerender()}},4000);return}
     dangerArm=null;const c=CUS(id);c.prevStatus=c.status;c.status='locked';c.lockReason='Khóa thủ công bởi quản trị viên';audit('Khóa tài khoản',c.name);save();rerender();toast('Đã khóa '+c.name+', khách không đăng nhập được');return}
   else if(ds.unlock){const c=CUS(ds.unlock);c.status=c.prevStatus&&c.prevStatus!=='locked'?c.prevStatus:'active';audit('Mở khóa tài khoản',c.name);save();rerender();toast('Đã mở khóa '+c.name);return}
-  else if(ds.imp){const c=CUS(ds.imp);S.session.imp=c.id;audit('Đăng nhập thay khách hàng để hỗ trợ',c.name);save();go('/');toast('Đang xem với tư cách '+c.name);return}
+  else if(ds.imp){const c=CUS(ds.imp);S.session.imp=c.id;audit('Đăng nhập thay khách hàng để hỗ trợ',c.name);save();go('/app');toast('Đang xem với tư cách '+c.name);return}
   else if('impexit' in ds){const id=S.session.imp;S.session.imp=null;save();go('/admin/customers/'+id);return}
   else if(ds.remind){const i=S.invoices.find(x=>x.no===ds.remind);audit('Gửi nhắc thanh toán',i.no,'bill');save();toast('Đã gửi nhắc cho '+CUS(i.cid).name);return}
   else if(ds.markpaid){const i=S.invoices.find(x=>x.no===ds.markpaid);i.st='paid';const c=CUS(i.cid);if(c.status==='overdue')c.status='active';audit('Xác nhận đã nhận tiền thủ công',i.no,'bill');save();rerender();toast('Đã ghi nhận thanh toán '+i.no);return}
@@ -1526,7 +1653,7 @@ document.addEventListener('click',e=>{
   else if('backup' in ds){toast('Đang sao lưu…');setTimeout(()=>toast('Sao lưu xong, đã đẩy lên Cloud Storage'),1000)}
   else if('logs' in ds){toast('Bản dùng thử: sẽ tải file nhật ký 7 ngày gần nhất')}
   else if('purge' in ds||'wipe' in ds){const k='purge' in ds?'purge':'wipe';
-    if(dangerArm!==k){dangerArm=k;rerender();setTimeout(()=>{if(dangerArm===k){dangerArm=null;if(CUR==='/settings/system')rerender()}},4000)}
+    if(dangerArm!==k){dangerArm=k;rerender();setTimeout(()=>{if(dangerArm===k){dangerArm=null;if(CUR==='/app/settings/system')rerender()}},4000)}
     else{dangerArm=null;if(k==='wipe'){S=initial();save();rerender();toast('Đã đặt lại dữ liệu mẫu')}else{rerender();toast('Đã dọn lịch sử giá chi tiết cũ')}}}
   if(!t.closest('.notif')){const p=document.getElementById('panel');if(p)p.classList.remove('open')}
   if(!t.closest('.memenu')){const p=document.getElementById('mepanel');if(p)p.classList.remove('open')}
@@ -1545,7 +1672,7 @@ document.addEventListener('input',e=>{if(e.target.id!=='q')return;const v=norm(e
   const r=S.deals.filter(d=>norm(d.name).includes(v)).slice(0,6);
   box.innerHTML=r.length?r.map(d=>{const b=best(d);return `<a href="#/site/${d.id}" role="option">${thumb(d,32)}<span style="flex:1;min-width:0"><b>${esc(d.name)}</b><span class="small muted" style="display:block">${PL[b.k]} · ${vnd(b.final)}</span></span><span class="small" style="color:${drop(d)<0?'var(--accent-ink)':'var(--warn)'};font-weight:500">${drop(d)>0?'+':''}${drop(d)}%</span></a>`}).join(''):'<div class="small muted" style="padding:12px 14px">Không tìm thấy sản phẩm</div>';
   box.classList.add('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('modal').classList.contains('open')){closeModal();return}const q=document.getElementById('q');if(!q)return;
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='cmpq'){cmpSearch();return}if(e.key==='Escape'&&document.getElementById('modal').classList.contains('open')){closeModal();return}const q=document.getElementById('q');if(!q)return;
   if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();q.focus()}
   if(e.key==='Escape'){document.getElementById('qres').classList.remove('open');q.blur()}});
 document.addEventListener('click',e=>{if(!e.target.closest('.search')){const b=document.getElementById('qres');if(b)b.classList.remove('open')}});
