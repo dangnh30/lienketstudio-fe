@@ -1,9 +1,20 @@
+/**
+ * Domain chính: ưu tiên NEXT_PUBLIC_SITE_URL (domain riêng); nếu không đặt mà đang build trên Vercel
+ * thì dùng domain production do Vercel cấp sẵn; cuối cùng là localhost khi chạy trên máy.
+ */
+function resolveSiteUrl() {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercel = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const url = explicit || (vercel ? `https://${vercel}` : "http://localhost:3000");
+  return url.replace(/\/$/, "");
+}
+
 export const siteConfig = {
   name: "Lienket Studio",
   shortName: "Lienket",
   description:
     "So sánh giá Shopee và TikTok Shop, lịch sử giá 90 ngày, chỉ đăng deal giảm giá thật – không giảm giá ảo.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, ""),
+  url: resolveSiteUrl(),
   locale: "vi_VN",
   language: "vi",
   twitter: "@lienketstudio",
