@@ -1,25 +1,101 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens – lấy từ design/mockup.html ("Pro layer").
+ * Màu chủ đạo (accent) là biến runtime để đổi theme qua [data-accent] trên <html>.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #d9621f;
+  --accent-ink: #a84a15;
+  --accent-bg: #fcebdf;
+  --accent-row: #fef6f0;
+  --accent-soft: #f2c4a6;
 }
+:root[data-accent="violet"] { --accent: #5b45d6; --accent-ink: #4632b0; --accent-bg: #eeebfc; --accent-row: #f7f5fe; --accent-soft: #cfc7f3; }
+:root[data-accent="navy"] { --accent: #1e3a8a; --accent-ink: #1e3a8a; --accent-bg: #e6ecf8; --accent-row: #f4f7fc; --accent-soft: #bfcbe6; }
+:root[data-accent="crimson"] { --accent: #b4233c; --accent-ink: #931b30; --accent-bg: #fbe9ec; --accent-row: #fdf5f6; --accent-soft: #edbcc5; }
+:root[data-accent="amber"] { --accent: #a15c07; --accent-ink: #7c4505; --accent-bg: #fbf0df; --accent-row: #fdf8ef; --accent-soft: #ebcb98; }
+:root[data-accent="graphite"] { --accent: #2f3640; --accent-ink: #1f242b; --accent-bg: #e9ebee; --accent-row: #f5f6f7; --accent-soft: #c3c8cf; }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-be-vietnam), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-bg: #ffffff;
+  --color-ink: #18181b;
+  --color-ink-2: #3f3f46;
+  --color-muted: #71717a;
+  --color-subtle: #a1a1aa;
+  --color-line: #e4e4e7;
+  --color-line-2: #f0f0f2;
+  --color-soft: #f4f4f5;
+  --color-panel: #f7f7f8;
+  --color-hover: #fafafa;
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-bg: var(--accent-bg);
+  --color-accent-row: var(--accent-row);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-warn: #9a3a0e;
+  --color-warn-bg: #fbebe2;
+  --color-warn-row: #fdf5f0;
+  --color-warn-line: #e8c8b4;
+  --color-danger: #b42318;
+  --color-danger-line: #f0c9c4;
+  --color-success: #127a4b;
+  --color-link: #1f5fbf;
+
+  /* Màu nhận diện sàn – cố định, không đổi theo theme */
+  --color-shopee: #ee4d2d;
+  --color-fb: #1f5fbf;
+  --color-fb-bg: #e7effb;
+  --color-tiktok: #15171a;
+  --color-tiktok-bg: #ecedef;
+
+  /* Bo góc theo thứ bậc 2 / 4 / 6px */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --shadow-pop: 0 12px 32px -8px rgb(24 24 27 / 0.16), 0 0 0 1px rgb(24 24 27 / 0.04);
+  --shadow-modal: 0 24px 64px -12px rgb(24 24 27 / 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.55;
+    letter-spacing: -0.006em;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--color-accent);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

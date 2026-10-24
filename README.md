@@ -1,109 +1,110 @@
-# Liên Kết Studio – Frontend
+# Lienket Studio – Frontend
 
-Next.js 16 (App Router, Cache Components, TypeScript, Tailwind v4), tối ưu SEO và cache CDN.
+SaaS săn deal affiliate: quét giá Shopee + TikTok Shop, lọc giảm giá ảo, duyệt deal, đăng Facebook/TikTok, trang so sánh giá công khai.
+Next.js 16 (App Router, Cache Components, Partial Prefetching), TypeScript, Tailwind v4. Thiết kế gốc: [`design/mockup.html`](design/mockup.html).
 
 ## Chạy dự án
 
 ```bash
-cp .env.example .env.local   # sửa NEXT_PUBLIC_SITE_URL
+cp .env.example .env.local   # sửa NEXT_PUBLIC_SITE_URL; production bắt buộc SESSION_SECRET
 npm install
 npm run dev                  # http://localhost:3000
 npm run build && npm start   # production
 ```
 
-## Cấu trúc
+Tài khoản dùng thử (dữ liệu mẫu, mật khẩu `demo1234`): khách hàng `minhanh@example.com`, quản trị `admin@lienket.vn` (mã 2 lớp: 6 số bất kỳ).
+
+## Kiến trúc
 
 ```
 src/
-  app/
-    layout.tsx               # Metadata gốc, font tiếng Việt, JSON-LD Organization + WebSite
-    page.tsx                 # Trang chủ
-    blog/[slug]/             # Bài viết: generateStaticParams, generateMetadata, JSON-LD, OG image động
-    gioi-thieu/              # Trang tĩnh
-    sitemap.ts robots.ts manifest.ts opengraph-image.tsx icon.svg
-    api/revalidate/route.ts  # Webhook làm mới cache + purge CDN
-  config/site.ts             # Tên site, domain, menu, social
-  lib/seo.ts                 # buildMetadata(): canonical, OG, Twitter
-  lib/data/posts.ts          # Data layer có "use cache" + cacheTag
-  lib/cdn.ts                 # cdn(): gắn domain CDN cho file /public
-  lib/cdn-purge.ts           # Purge Cloudflare
-deploy/nginx.conf            # Reverse proxy + cache tầng origin
-Dockerfile                   # Build standalone
+  app/                     Định tuyến – mỏng, chỉ ghép feature lại
+    (public)/              Trang công khai: SEO, prerender tĩnh, CDN cache (ensureStatic = "navigation")
+    (auth)/login/          Đăng nhập + xác minh 2 lớp
+    (app)/app/       Khu khách hàng: dynamic, noindex, dữ liệu theo phiên
+    (app)/admin/           Khu quản trị nền tảng
+  domain/                  Kiểu dữ liệu + logic nghiệp vụ thuần (không phụ thuộc framework)
+  features/<tên>/          Theo nghiệp vụ: components/, server/ (queries, service), actions.ts
+    auth · app-shell · dashboard · deals · publishing · public-catalog
+  server/
+    repositories/types.ts  Interface truy cập dữ liệu (Repository pattern)
+    repositories/memory.ts Bản in-memory dùng dữ liệu mẫu
+    container.ts           Composition root – chọn implementation theo DATA_SOURCE
+    auth/                  token (JWT) · session (cookie) · dal (kiểm quyền)
+  shared/                  UI kit theo design token, tiện ích, config
+  proxy.ts                 Route guard: verify phiên, phân quyền, 404 tham số sai
 ```
 
-## SEO có sẵn
+**Luồng dữ liệu**
 
-- `metadataBase`, title template `%s | Liên Kết Studio`, canonical cho từng trang
-- Open Graph + Twitter card, ảnh OG sinh tự động (`opengraph-image.tsx`)
-- `sitemap.xml`, `robots.txt` (staging: `NEXT_PUBLIC_NOINDEX=true`), `manifest.webmanifest`
-- JSON-LD: Organization, WebSite, BlogPosting, BreadcrumbList
-- `lang="vi"`, font Be Vietnam Pro tự host (subset vietnamese, `display: swap`)
-- Trang được **prerender thành HTML tĩnh** → TTFB thấp, bot đọc được đầy đủ nội dung
+- **Đọc:** `page` → `features/*/server/queries` (gọi `requireCustomer()` / `requireAdmin()`) → `repositories()`.
+- **Ghi:** Client Component → server action (`features/*/actions.ts`): validate bằng zod → kiểm lại quyền → service → `refresh()` / `revalidateTag()` → trả `ActionResult`.
 
-Thêm trang mới: export `metadata = buildMetadata({ title, description, path })` và thêm URL vào `sitemap.ts`.
+**Quy tắc**
 
-## Chiến lược cache (3 tầng)
+- `domain/` không import gì từ Next/React. Logic nghiệp vụ đặt ở đây hoặc trong service, không đặt trong component.
+- Feature không import chéo `components` của nhau. Thứ dùng chung đưa lên `shared/` hoặc `domain/`.
+- Mọi thao tác ghi đều đi qua server action và luôn gọi `requireCustomer()` / `requireAdmin()`. `proxy.ts` chỉ là lớp chặn sớm, không thay thế bước kiểm quyền này.
+- Lỗi nghiệp vụ ném `DomainError`, bọc bằng `handleAction()` để trả về thông báo cho người dùng thay vì lỗi 500.
+- Khi có backend thật: viết `server/repositories/api.ts` implement các interface trong `types.ts`, rồi thêm `case "api"` vào `container.ts`. UI và service không phải sửa.
+
+**Trạng thái màn hình so với mockup**
+
+| Đã làm | Chưa làm (đang là trang tạm) |
+| --- | --- |
+| Trang so sánh giá (`/`, `/deal/[slug]`) · Đăng nhập + 2FA · Tổng quan · Duyệt deal · Lịch đăng (3 kênh) · Khung admin | Ghép sản phẩm · Thống kê · Liên kết · Tài khoản liên kết · Kết nối và nguồn · Cài đặt · Các màn admin |
+
+## SEO
+
+- **Chỉ khu `(public)` được index.** Dashboard, admin và login đều đặt `noindex` và bị chặn trong `robots.txt`.
+- **Metadata:** canonical, Open Graph, Twitter cho từng trang (`buildMetadata`); ảnh OG sinh riêng cho từng deal.
+- **JSON-LD:** Organization, WebSite, Product + AggregateOffer (giá theo từng sàn), BreadcrumbList.
+- **Link affiliate** gắn `rel="sponsored nofollow"` theo hướng dẫn của Google.
+- **Biểu đồ lịch sử giá** là SVG render trên server, nên bot đọc được mà không cần JS.
+- **Deal mới duyệt** (không có trong lần build) được render tĩnh ngay ở lần truy cập đầu rồi lưu cache (ISR với Cache Components).
+
+## Chiến lược cache
 
 | Tầng | Cái gì | Thời gian |
 | --- | --- | --- |
 | Trình duyệt | `/_next/static/*` (có hash) | 1 năm, `immutable` |
-| CDN | HTML trang (`s-maxage` + `stale-while-revalidate`) | theo `cacheLife` (`content`: 1h, giữ bản cũ 7 ngày) |
-| CDN | File `/public` (ảnh, font, icon) | trình duyệt 1 ngày, CDN 31 ngày |
-| Next.js server | Dữ liệu `"use cache"` | theo `cacheLife`, xoá bằng `cacheTag` |
-| Next.js server | Ảnh `next/image` đã tối ưu (avif/webp) | 31 ngày |
+| CDN | HTML trang công khai (`s-maxage` + `stale-while-revalidate`) | profile `content`: 1h, giữ bản cũ 7 ngày |
+| CDN | File `/public` | trình duyệt 1 ngày, CDN 31 ngày |
+| Next.js server | Dữ liệu công khai `"use cache"` (tag `public-deals`) | theo `cacheLife`, xoá theo tag |
+| Không cache | Dashboard / admin (`Cache-Control: private`) | dữ liệu theo phiên |
 
-Profile cache khai báo trong `next.config.ts` → `cacheLife`. Dùng trong data function:
-
-```ts
-export async function getProducts() {
-  "use cache";
-  cacheLife("content");
-  cacheTag("products");
-  return fetch(`${process.env.API_URL}/products`).then((r) => r.json());
-}
-```
-
-### Khi nội dung thay đổi
-
-CMS/backend gọi webhook:
+Khi duyệt deal, action gọi `revalidateTag("public-deals", "max")` và purge CDN cho `/` và `/deal`. Backend/CMS cũng có thể gọi webhook:
 
 ```bash
 curl -X POST https://lienketstudio.com/api/revalidate \
-  -H "x-revalidate-secret: $REVALIDATE_SECRET" \
-  -H "content-type: application/json" \
-  -d '{"tags":["posts"],"paths":["/blog","/blog/slug-bai-viet"]}'
+  -H "x-revalidate-secret: $REVALIDATE_SECRET" -H "content-type: application/json" \
+  -d '{"tags":["public-deals"],"paths":["/","/deal/slug-san-pham"]}'
 ```
-
-→ đánh dấu cache Next.js là cũ (người dùng vẫn nhận bản cũ ngay, bản mới render nền) và purge CDN các đường dẫn đó.
 
 ## Cấu hình CDN
 
-**Cách 1 – Cloudflare proxy toàn domain (khuyến nghị, đơn giản nhất)**
+**Cách 1 – Cloudflare proxy toàn domain (khuyến nghị)**
 
-1. Trỏ DNS qua Cloudflare, bật proxy (mây cam).
-2. Tạo *Cache Rule*: hostname = domain, không phải `/api/*` → **Eligible for cache**, Edge TTL: *Use cache-control header*, Browser TTL: *Respect origin*.
-3. **Không** bật "Ignore query string" – `?_rsc=` phải nằm trong cache key, nếu không sẽ trộn HTML với RSC payload làm hỏng điều hướng.
-4. Điền `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (quyền *Zone.Cache Purge*) để webhook tự purge.
+1. Trỏ DNS qua Cloudflare, bật proxy.
+2. Tạo *Cache Rule*: hostname = domain, loại trừ `/api/*`, `/app*`, `/admin*`, `/login` → **Eligible for cache**, Edge TTL: *Use cache-control header*.
+3. **Không** bật "Ignore query string": `?_rsc=` phải nằm trong cache key, nếu không CDN sẽ trộn HTML với RSC payload.
+4. Điền `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_API_TOKEN` (quyền *Zone.Cache Purge*).
 
-**Cách 2 – Domain CDN riêng cho assets (BunnyCDN, CloudFront, ...)**
+**Cách 2 – Domain CDN riêng cho assets:** build với `NEXT_PUBLIC_CDN_URL=https://cdn.lienketstudio.com`; file `/public` dùng `cdn("/images/x.jpg")`.
 
-1. Tạo pull zone `cdn.lienketstudio.com` với origin = domain chính.
-2. Build với `NEXT_PUBLIC_CDN_URL=https://cdn.lienketstudio.com` → JS/CSS tự lấy từ CDN.
-3. File trong `/public` dùng `cdn("/images/x.jpg")` để trỏ qua CDN.
-
-Có thể kết hợp cả hai. Nếu chạy nhiều instance, đặt cùng `deploymentId` và `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`, và dùng cache handler chung (Redis) – xem `node_modules/next/dist/docs/01-app/02-guides/self-hosting.md`.
+Chạy nhiều instance: đặt cùng `deploymentId`, `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`, `SESSION_SECRET` và dùng cache handler chung (Redis). Xem `node_modules/next/dist/docs/01-app/02-guides/self-hosting.md`.
 
 ## Deploy
 
 ```bash
 docker build --build-arg NEXT_PUBLIC_SITE_URL=https://lienketstudio.com -t lienketstudio-fe .
-docker run -p 3000:3000 -e REVALIDATE_SECRET=... lienketstudio-fe
+docker run -p 3000:3000 -e SESSION_SECRET=... -e REVALIDATE_SECRET=... lienketstudio-fe
 ```
 
 Đặt `deploy/nginx.conf` phía trước (VPS) để có thêm tầng cache ở origin.
 
 ## Lưu ý
 
-- `NEXT_PUBLIC_*` được nhúng lúc build → đổi domain phải build lại.
-- Không dùng `cookies()`/`headers()` trong trang cần SEO trừ khi bắt buộc – trang sẽ thành dynamic (`Cache-Control: private`) và CDN không cache được.
-- Ảnh: dùng `next/image` với `sizes` hợp lý; ảnh từ domain ngoài phải khai báo trong `images.remotePatterns`.
+- `NEXT_PUBLIC_*` được nhúng lúc build, nên đổi domain phải build lại.
+- Không dùng `cookies()`/`headers()` trong `(public)`: build sẽ fail (có `ensureStatic`), vì trang dynamic thì CDN không cache được.
+- Dữ liệu in-memory reset khi khởi động lại server. Đây là bản mock, chỉ dùng cho dev/demo.

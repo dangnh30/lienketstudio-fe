@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl } from "@/shared/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   // Môi trường staging: đặt NEXT_PUBLIC_NOINDEX=true để chặn Google index
@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: ["/api/", "/app", "/admin", "/login", "/signup"],
     },
     sitemap: absoluteUrl("/sitemap.xml"),
   };

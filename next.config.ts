@@ -31,6 +31,10 @@ export default function config(phase: string): NextConfig {
 
     assetPrefix: isDev ? undefined : CDN_URL,
 
+    // Cho phép mở dev server qua IP mạng LAN (vd. http://192.168.x.x:3000, test trên điện thoại).
+    // Thiếu dòng này, Next chặn kết nối HMR => trang chậm, tự tải lại liên tục. Chỉ có tác dụng khi dev.
+    allowedDevOrigins: ["192.168.*.*", "10.*.*.*"],
+
     // Cache Components: HTML được prerender sẵn, CDN cache theo s-maxage / stale-while-revalidate
     cacheComponents: true,
     partialPrefetching: true,
@@ -71,6 +75,10 @@ export default function config(phase: string): NextConfig {
         // Thêm domain ảnh từ CMS / storage tại đây
         // { protocol: "https", hostname: "cdn.lienketstudio.com" },
       ],
+    },
+
+    async redirects() {
+      return [{ source: "/app/schedule", destination: "/app/schedule/fbpage", permanent: false }];
     },
 
     async headers() {

@@ -1,22 +1,19 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
-import { getPosts } from "@/lib/data/posts";
+import { absoluteUrl } from "@/shared/lib/seo";
+import { dealPath } from "@/features/public-catalog/seo";
+import { getPublishedDeals } from "@/features/public-catalog/server/queries";
 
+/** Chỉ liệt kê trang công khai. Dashboard/admin là trang riêng tư, không đưa vào sitemap. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPosts();
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl("/"), changeFrequency: "weekly", priority: 1 },
-    { url: absoluteUrl("/blog"), changeFrequency: "daily", priority: 0.8 },
-    { url: absoluteUrl("/gioi-thieu"), changeFrequency: "yearly", priority: 0.5 },
+  const deals = await getPublishedDeals();
+  return [
+    { url: absoluteUrl("/"), changeFrequency: "hourly", priority: 1 },
+    { url: absoluteUrl("/dieu-khoan"), changeFrequency: "yearly", priority: 0.2 },
+    { url: absoluteUrl("/bao-mat"), changeFrequency: "yearly", priority: 0.2 },
+    ...deals.map((deal) => ({
+      url: absoluteUrl(dealPath(deal)),
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    })),
   ];
-
-  const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: absoluteUrl(`/blog/${post.slug}`),
-    lastModified: post.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
-  return [...staticRoutes, ...postRoutes];
 }
