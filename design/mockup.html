@@ -244,7 +244,7 @@ label.f{font-size:13.5px}
 .ph{background:linear-gradient(135deg,#F1F1F3,#E6E6EA)}
 .meter .bar{background:#EDEDF0}
 .sitebar{box-shadow:var(--sh1)}
-.site,.site>*,.site section{min-width:0;max-width:100%}.site .tbl{max-width:100%}
+.site>*,.site section{min-width:0;max-width:100%}.site .tbl{max-width:100%}
 .tbl{position:relative}
 @media (max-width:900px){
   .app{flex-direction:column}
@@ -469,6 +469,38 @@ input.sw::after,.sysForm input[type=checkbox]::after,#setForm input[type=checkbo
 .iconbtn .dot{border-radius:3px}
 .modebar a,.modebar button{border-radius:3px}
 .tk.on{box-shadow:inset 2px 0 0 var(--accent)}
+/* ===== Trang so sánh giá ===== */
+.cmp-hero{display:flex;flex-direction:column;gap:14px;padding:28px 0 6px}
+.cmp-hero h1{font-size:30px;letter-spacing:-.02em}
+.cmp-box{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 6px 6px 14px;color:var(--muted)}
+.cmp-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.cmp-box input{flex:1;min-width:0;border:none!important;box-shadow:none!important;outline:none;background:transparent;padding:0!important;font-size:15px;color:var(--ink)}
+.cmp-box.big{padding:8px 8px 8px 16px}.cmp-box.big input{font-size:16.5px;min-height:44px}
+.cmp-q{display:flex;flex-direction:column;gap:8px}.cmp-q .err{min-height:0}.cmp-q .err:empty{display:none}
+.cmp-targets{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tgt{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px 0 8px;border:1px solid var(--line);border-radius:4px;background:#fff;font:inherit;font-size:13.5px;color:var(--ink2);cursor:pointer}
+.tgt .ck{width:18px;height:18px;border-radius:2px;border:1px solid #C9CACF;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.tgt.on{border-color:var(--accent);color:var(--ink);background:var(--accent-row)}.tgt.on .ck{background:var(--accent);border-color:var(--accent)}
+.cmp-how{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;counter-reset:s}
+.cmp-how li{background:#fff;padding:12px 14px;display:flex;flex-direction:column;gap:2px;font-size:13.5px;counter-increment:s}
+.cmp-how li b::before{content:counter(s) ". ";color:var(--accent)}
+.cmp-how li span{color:var(--muted);font-size:13px}
+.pick{display:flex;align-items:center;gap:12px;width:100%;padding:12px 20px;border:none;border-top:1px solid var(--line2);background:#fff;font:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+.pick:hover{background:#FAFAFA}
+.src{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:18px 20px}
+.srcimg{width:120px;height:120px;flex:0 0 auto;border-radius:4px}
+.srcinfo{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.srcprice{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.srcprice b{font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.verdict{display:flex;flex-direction:column;gap:2px;padding:14px 18px;border-radius:6px;background:var(--accent-row);border:1px solid var(--accent-soft);font-size:14px}
+.verdict b{font-size:17px;font-weight:600}.verdict span{color:var(--ink2)}
+.verdict.same{background:#F7F7F8;border-color:var(--line)}
+.mrow{display:flex;align-items:center;gap:12px;padding:12px 20px;border-top:1px solid var(--line2);font-size:14px;flex-wrap:wrap}
+.mprice{display:flex;flex-direction:column;align-items:flex-end;min-width:120px;font-size:13px}
+.mprice b{font-size:15px}
+.cheaper{color:#127A4B;font-weight:500}.dearer{color:var(--muted)}
+.site-ic{width:32px;height:32px;border-radius:4px;background:var(--soft);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:0 0 auto}
+@media (max-width:640px){.mrow{gap:8px 12px}.mrow>span:nth-child(2){flex:1 1 calc(100% - 50px)}.mrow>.badge{order:-1}.mrow>.badge+span{flex:1 1 100%!important}.mprice{flex-direction:row;gap:8px;align-items:baseline}.srcimg{width:72px;height:72px}.srcinfo{flex-basis:calc(100% - 90px)}.srcprice{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px;width:100%}.srcprice .small{width:100%}.cmp-hero h1{font-size:24px}.mprice{align-items:flex-start;min-width:0}.mrow .btn{margin-left:auto}.cmp-box .btn{padding:0 12px}}
 </style>
 </head>
 <body>
@@ -477,7 +509,7 @@ input.sw::after,.sysForm input[type=checkbox]::after,#setForm input[type=checkbo
   <button type="button" id="m-admin" data-demo="customer">Khách hàng</button>
   <button type="button" id="m-sa" data-demo="admin">Quản trị viên</button>
   <a href="#/login" id="m-login">Đăng nhập</a>
-  <a href="#/site/a" id="m-site">Trang so sánh giá</a>
+  <a href="#/site" id="m-site">Trang so sánh giá</a>
   <span class="sp"></span>
   <span style="opacity:.75">Dữ liệu mẫu</span>
   <button type="button" id="reset">Đặt lại dữ liệu</button>
@@ -1367,21 +1399,69 @@ function chart(d){const h=d.history,min=Math.min(...h,d.avg30)*0.97,max=Math.max
 return `<svg viewBox="0 0 740 240" role="img" aria-label="Lịch sử giá 90 ngày" style="width:100%;height:auto;display:block;font-family:inherit"><line x1="56" x2="720" y1="${Y(d.avg30)}" y2="${Y(d.avg30)}" stroke="#8A8F96" stroke-dasharray="5 5"/><text x="62" y="${Y(d.avg30)+16}" font-size="12" fill="#3E434A">TB 30 ngày ${vnd(d.avg30)}</text>
 <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" points="${h.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ')}"/><circle cx="${X(hi)}" cy="${Y(h[hi])}" r="5" fill="#fff" stroke="#B4400F" stroke-width="2"/><text x="${X(hi)+10}" y="${Y(h[hi])-6}" font-size="12" fill="#9A3A0E">Đỉnh ${vnd(h[hi])}</text>
 <circle cx="${X(last)}" cy="${Y(h[last])}" r="6" fill="var(--accent)"/><text x="${X(last)-10}" y="${Y(h[last])-12}" text-anchor="end" font-size="12.5" font-weight="500" fill="#15171A">${vnd(h[last])}</text><text x="60" y="228" font-size="12" fill="#5B6068">90 ngày trước</text><text x="716" y="228" text-anchor="end" font-size="12" fill="#5B6068">Hôm nay</text></svg>`}
+/* ---------- trang so sánh giá (người mua): dán link Shopee hoặc tìm tên → chọn nơi so sánh → kết quả ---------- */
+let CMPQ='',CMPERR='',CMPT={tt:true,gg:true};
+const isUrl=v=>/^https?:\/\/|^www\.|\.(vn|com)\//i.test(v);
+const r1k=v=>Math.round(v/1000)*1000;
+function cmpData(d){
+  const srcK=d.offers.sp?'sp':'tt',otherK=srcK==='sp'?'tt':'sp',src=d.offers[srcK];
+  const o=d.offers[otherK];
+  const short=d.name.replace(/\s*\[.*\]\s*/,'').trim(),model=(d.name.match(/\[(.*)\]/)||[])[1]||'';
+  const tt=o?[
+    {conf:96,title:`${short} ${model} chính hãng`,shop:`[Shop ${PL[otherK]} 1]`,price:o.final,sold:'1,2k',note:'Trùng mã model và tên'},
+    {conf:71,title:`${short} ${model.replace('Model','Model')} bản Lite`,shop:`[Shop ${PL[otherK]} 2]`,price:r1k(o.final*0.82),sold:'640',note:'Cùng hãng, khác phiên bản'}
+  ]:[
+    {conf:64,title:`${short} cùng phân khúc`,shop:`[Shop ${PL[otherK]} 3]`,price:r1k(src.final*0.9),sold:'310',note:'Chỉ giống tên, khác mã model'},
+    {conf:58,title:`${short} loại phổ thông`,shop:`[Shop ${PL[otherK]} 4]`,price:r1k(src.final*0.7),sold:'2,1k',note:'Khác hãng'}
+  ];
+  const gg=[['Tiki','tiki.vn',1.04],['Lazada','lazada.vn',0.99],['CellphoneS','cellphones.com.vn',1.07],['Website hãng','[website hãng]',1.15]].map(([n,dom,k])=>({n,dom,price:r1k(src.final*k),title:`${short} ${model}`}));
+  return {srcK,otherK,src,tt,gg,short,model};
+}
+function cmpSearch(){const el=document.getElementById('cmpq');const v=el.value.trim();CMPERR='';
+  if(!v){CMPERR='Dán link Shopee hoặc gõ tên sản phẩm';rerender();document.getElementById('cmpq').focus();return}
+  if(isUrl(v)){if(/shopee\.vn|shp\.ee/i.test(v)){CMPQ=v;go('/site/a');toast('Đã đọc link Shopee');return}
+    CMPERR='Hiện chỉ đọc được link Shopee. Sản phẩm ở nơi khác thì gõ tên sản phẩm.';rerender();return}
+  CMPQ=v;go('/site')}
 function vSite(id){
-  const d=D(id)||D('a');const b=best(d);
-  const rows=Object.keys(d.offers).map(k=>({k,...d.offers[k]})).sort((x,y)=>x.final-y.final).map((o,i)=>`<tr class="${i===0?'best':''}"><td><span class="badge ${o.k}">${PL[o.k]}</span>${i===0?' <span class="badge ok">Rẻ hơn</span>':''}</td><td>${vnd(o.list)}</td><td>${o.coupon?'−'+vnd(o.coupon):'<span class="muted">Không có</span>'}</td><td><b>${vnd(o.final)}</b></td><td class="muted">${o.checked}</td><td style="text-align:right"><a href="#" data-out="${PL[o.k]}" style="font-weight:500">Xem trên ${PL[o.k]}</a></td></tr>`).join('');
-  const others=S.deals.filter(x=>x.id!==d.id&&x.status==='approved').map(x=>`<a href="#/site/${x.id}" class="card pad" style="text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px"><span class="badge ok" style="align-self:flex-start">${drop(x)}%</span><b>${esc(x.name)}</b><span style="color:var(--accent);font-weight:600">${vnd(best(x).final)}</span></a>`).join('');
-  return `<div class="sitebar"><div class="in"><b style="font-size:18px">[Tên kênh]</b><span class="muted small">So sánh giá Shopee và TikTok Shop</span><span style="flex:1"></span><a class="btn sm" href="#" data-out="Facebook">Theo dõi trên Facebook</a><a class="btn sm" href="#" data-out="TikTok">Theo dõi trên TikTok</a></div></div>
-  <main class="site"><section class="card" style="padding:22px;display:flex;flex-wrap:wrap;gap:28px"><div class="ph" style="flex:1 1 280px;max-width:360px;aspect-ratio:1/1;border-radius:6px">[Ảnh sản phẩm từ CDN của sàn]</div>
-  <div style="flex:999 1 380px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="row" style="gap:8px"><span class="badge ok">Deal thật · ${drop(d)}% so với TB 30 ngày</span>${pBadges(d)}</div>
-  <h1 style="font-size:26px;line-height:1.3">${esc(d.name)}: lịch sử giá, nơi bán rẻ nhất hôm nay</h1>
-  <div><div class="small muted">Giá cuối thấp nhất</div><div style="font-size:36px;font-weight:600;color:var(--accent);line-height:1.1">${vnd(b.final)}</div><div class="small">tại ${PL[b.k]} · kiểm tra lúc ${b.checked}</div></div>
-  <a class="btn pri" href="#" data-out="${PL[b.k]}" style="align-self:flex-start">Mua tại ${PL[b.k]} ↗</a>
-  <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></div></section>
-  <section class="card pad"><h2 style="font-size:19px;margin-bottom:10px">So sánh Shopee và TikTok Shop</h2><div class="tbl"><table style="min-width:620px"><thead><tr><th>Sàn</th><th>Giá niêm yết</th><th>Mã</th><th>Giá cuối</th><th>Cập nhật</th><th><span class="sr">Mua</span></th></tr></thead><tbody>${rows}</tbody></table></div></section>
-  <section class="card pad"><h2 style="font-size:19px;margin-bottom:10px">Lịch sử giá 90 ngày</h2>${chart(d)}</section>
-  ${others?`<section><h2 style="font-size:19px;margin-bottom:10px">Deal thật khác</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">${others}</div></section>`:''}
-  <p class="small muted" style="margin:0">Trang tĩnh, phát qua Cloudflare Pages. Ảnh sản phẩm tải từ CDN của sàn.</p></main>`;
+  const bar=`<div class="sitebar"><div class="in"><a href="#/site" style="text-decoration:none;color:var(--ink)"><b style="font-size:18px">[Tên kênh]</b></a><span class="muted small">So sánh giá Shopee, TikTok Shop và các website khác</span><span style="flex:1"></span><a class="btn sm" href="#" data-out="Facebook">Theo dõi trên Facebook</a><a class="btn sm" href="#" data-out="TikTok">Theo dõi trên TikTok</a></div></div>`;
+  const d=id?D(id):null;
+  const box=(val,big)=>`<div class="cmp-box ${big?'big':''}"><label class="sr" for="cmpq">Link Shopee hoặc tên sản phẩm</label>${ico('search',big?20:16)}<input type="search" id="cmpq" placeholder="Dán link sản phẩm Shopee hoặc gõ tên sản phẩm" value="${esc(val)}" autocomplete="off"><button class="btn pri" type="button" data-cmpgo>${big?'Tìm sản phẩm':'Tìm'}</button></div><div class="err" id="cmperr">${esc(CMPERR)}</div>`;
+  const chips=`<div class="cmp-targets"><span class="small muted">So sánh với</span>${[['tt','TikTok Shop'],['gg','Website khác qua Google']].map(([k,t])=>`<button type="button" class="tgt ${CMPT[k]?'on':''}" data-cmpt="${k}" aria-pressed="${CMPT[k]}"><span class="ck">${CMPT[k]?'✓':''}</span>${t}</button>`).join('')}</div>`;
+  /* bước 1 + 2: chưa chọn sản phẩm */
+  if(!d){
+    const q=CMPQ.trim(),nq=norm(q);
+    const res=q&&!isUrl(q)?S.deals.filter(x=>x.offers.sp&&norm(x.name).includes(nq)):[];
+    const list=q&&!isUrl(q)?(res.length?`<section class="card"><div class="pad" style="padding-bottom:6px"><h2 style="font-size:16px">Kết quả trên Shopee cho "${esc(q)}"</h2><div class="small muted">Chọn đúng sản phẩm bạn định mua</div></div>
+      ${res.map(x=>{const o=x.offers.sp;return `<button type="button" class="pick" data-cmppick="${x.id}">${thumb(x,48)}<span style="flex:1;min-width:0;text-align:left"><b style="font-weight:500">${esc(x.name)}</b><span class="small muted" style="display:block">[Tên shop Shopee] · đã bán 1,2k</span></span><b class="tnum">${vnd(o.final)}</b><span class="btn sm">So sánh</span></button>`}).join('')}</section>`
+      :`<div class="card pad small muted">Không tìm thấy "${esc(q)}" trên Shopee. Thử tên ngắn hơn, ví dụ chỉ tên hãng và mẫu.</div>`):'';
+    return bar+`<main class="site"><section class="cmp-hero"><h1>Mua ở đâu rẻ nhất?</h1><p class="muted" style="margin:0">Dán link sản phẩm Shopee hoặc gõ tên. Hệ thống tìm cùng sản phẩm trên TikTok Shop và các website khác để bạn so giá.</p><div class="cmp-q">${box(CMPQ,true)}${chips}</div>
+      <ol class="cmp-how"><li><b>Dán link hoặc gõ tên</b><span>Link dạng shopee.vn/… hoặc shp.ee/…</span></li><li><b>Chọn nơi so sánh</b><span>TikTok Shop, các website bán lẻ khác</span></li><li><b>Xem nơi rẻ nhất</b><span>Kèm lịch sử giá 90 ngày trên Shopee</span></li></ol></section>
+      ${list}
+      ${q?'':`<section><h2 style="font-size:16px;margin-bottom:10px">Đang được so sánh nhiều</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">${S.deals.filter(x=>x.offers.sp&&!x.flag).slice(0,4).map(x=>`<a href="#/site/${x.id}" class="card pad" style="text-decoration:none;color:var(--ink);display:flex;gap:10px;align-items:center">${thumb(x,40)}<span style="min-width:0"><b style="font-weight:500;display:block">${esc(x.name)}</b><span class="small muted">Shopee ${vnd(x.offers.sp.final)}</span></span></a>`).join('')}</div></section>`}
+      <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></main>`;
+  }
+  /* bước 3: kết quả */
+  const c=cmpData(d),src=c.src;
+  const ttSame=c.tt.filter(x=>x.conf>=90);
+  const cands=[{where:PL[c.srcK],price:src.final}].concat(CMPT.tt?ttSame.map(x=>({where:PL[c.otherK],price:x.price})):[]).concat(CMPT.gg?c.gg.map(x=>({where:x.n,price:x.price})):[]);
+  const cheapest=[...cands].sort((a,b)=>a.price-b.price)[0];
+  const save=src.final-cheapest.price;
+  const diff=p=>{const v=p-src.final;return v===0?'<span class="muted">bằng giá</span>':`<span class="${v<0?'cheaper':'dearer'}">${v<0?'rẻ hơn ':'đắt hơn '}${vnd(Math.abs(v))}</span>`};
+  const verdict=cheapest.where===PL[c.srcK]?`<div class="verdict same"><b>${PL[c.srcK]} đang rẻ nhất: ${vnd(src.final)}</b><span>Không nơi nào bạn chọn bán cùng sản phẩm rẻ hơn.</span></div>`
+    :`<div class="verdict"><b>Rẻ nhất ở ${cheapest.where}: ${vnd(cheapest.price)}</b><span>Rẻ hơn ${PL[c.srcK]} ${vnd(save)} (${Math.round(save/src.final*100)}%). Kiểm tra lại phí vận chuyển và mã giảm giá trước khi mua.</span></div>`;
+  const ttSec=CMPT.tt?`<section class="card"><div class="pad row between" style="padding-bottom:8px"><div><h2 style="font-size:16px">Trên ${PL[c.otherK]}</h2><div class="small muted">Ghép theo tên và mã model. Kiểm tra màu, phiên bản trước khi mua.</div></div></div>
+    ${ttSame.length?'':`<div class="small" style="padding:0 20px 10px;color:var(--warn)">Chưa tìm thấy đúng sản phẩm này trên ${PL[c.otherK]}. Dưới đây là sản phẩm gần giống.</div>`}
+    ${c.tt.map(x=>`<div class="mrow"><span class="badge ${x.conf>=90?'ok':''}">${x.conf>=90?'Cùng sản phẩm':'Gần giống'}</span><span style="flex:1;min-width:0"><b style="font-weight:500">${esc(x.title)}</b><span class="small muted" style="display:block">${x.shop} · đã bán ${x.sold} · ${x.note}</span></span><span class="mprice"><b class="tnum">${vnd(x.price)}</b>${x.conf>=90?diff(x.price):'<span class="muted small">khác sản phẩm</span>'}</span><a class="btn sm" href="#" data-out="${PL[c.otherK]}">Xem trên ${PL[c.otherK]}</a></div>`).join('')}</section>`:'';
+  const ggSec=CMPT.gg?`<section class="card"><div class="pad" style="padding-bottom:8px"><h2 style="font-size:16px">Trên các website khác</h2><div class="small muted">Tìm qua Google trong danh sách website bán lẻ đã chọn. Giá do website công bố, có thể đã đổi.</div></div>
+    ${c.gg.map(x=>`<div class="mrow"><span class="site-ic">${esc(x.n.charAt(0))}</span><span style="flex:1;min-width:0"><b style="font-weight:500">${esc(x.n)}</b><span class="small muted" style="display:block">${esc(x.title)} · ${esc(x.dom)}</span></span><span class="mprice"><b class="tnum">${vnd(x.price)}</b>${diff(x.price)}</span><a class="btn sm" href="#" data-out="${esc(x.n)}">Mở trang</a></div>`).join('')}
+    <div class="pad row between" style="border-top:1px solid var(--line2);padding-top:12px"><span class="small muted">Không thấy website bạn hay mua?</span><a class="btn sm" href="#" data-out="Google">Tìm "${esc(c.short)} ${esc(c.model)}" trên Google</a></div></section>`:'';
+  return bar+`<main class="site"><div class="cmp-q">${box(CMPQ||'https://shopee.vn/'+norm(d.name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-i.123456.789012',false)}${chips}</div>
+  <section class="card src"><div class="ph srcimg">[Ảnh]</div><div class="srcinfo"><div class="row" style="gap:6px"><span class="badge ${c.srcK}">${PL[c.srcK]}</span><span class="small muted">Sản phẩm bạn dán</span></div>
+    <h1 style="font-size:22px;line-height:1.3">${esc(d.name)}</h1><div class="small muted">[Tên shop ${PL[c.srcK]}] · ${src.coupon?'đã trừ mã '+vnd(src.coupon)+' · ':''}kiểm tra lúc ${src.checked}</div></div>
+    <div class="srcprice"><span class="small muted">Giá trên ${PL[c.srcK]}</span><b>${vnd(src.final)}</b><a class="btn sm" href="#" data-out="${PL[c.srcK]}">Mua trên ${PL[c.srcK]}</a></div></section>
+  ${verdict}${ttSec}${ggSec}
+  <section class="card pad"><h2 style="font-size:16px;margin-bottom:10px">Lịch sử giá 90 ngày trên ${PL[c.srcK]}</h2>${chart(d)}</section>
+  <p class="small muted" style="margin:0">${esc(S.settings.disclosure)}</p></main>`;
 }
 
 /* ---------- kết nối tài khoản (mô phỏng) ---------- */
@@ -1466,6 +1546,9 @@ document.addEventListener('click',e=>{
   else if('dl' in ds){toast('Bản dùng thử: sẽ tải video về máy, rồi xóa khỏi máy chủ')}
   else if('inbox' in ds){toast('Bản dùng thử: video sẽ xuất hiện trong hộp thư TikTok của bạn')}
   else if(ds.match){S.matches.c=ds.match;save();rerender();if(ds.match!=='pending')toast(ds.match==='yes'?'Đã ghép, sẽ so giá hai sàn':'Đã từ chối gợi ý')}
+  else if('cmpgo' in ds){cmpSearch();return}
+  else if(ds.cmppick){CMPERR='';go('/site/'+ds.cmppick);return}
+  else if(ds.cmpt){const k=ds.cmpt;if(CMPT[k]&&!CMPT[k==='tt'?'gg':'tt']){toast('Chọn ít nhất một nơi để so sánh');return}CMPT[k]=!CMPT[k];rerender();return}
   else if(ds.out){e.preventDefault();toast('Bản dùng thử: link affiliate tới '+ds.out+' sẽ mở ở đây')}
   else if(ds.demo){if(ds.demo==='admin'){S.session={role:'admin',imp:null};save();go('/admin')}else{S.session={role:'customer',imp:null};save();go('/')}return}
   else if(ds.quick){LOGIN_EMAIL=ds.quick==='admin'?'admin@lienket.vn':'minhanh@example.com';if(ds.quick==='admin'){LOGIN_STEP='2fa';rerender();setTimeout(()=>{const c=document.getElementById('l_code');if(c)c.focus()},0)}else{S.session={role:'customer',imp:null};LOGIN_NOTE='';save();go('/');toast('Đã đăng nhập')}return}
@@ -1545,7 +1628,7 @@ document.addEventListener('input',e=>{if(e.target.id!=='q')return;const v=norm(e
   const r=S.deals.filter(d=>norm(d.name).includes(v)).slice(0,6);
   box.innerHTML=r.length?r.map(d=>{const b=best(d);return `<a href="#/site/${d.id}" role="option">${thumb(d,32)}<span style="flex:1;min-width:0"><b>${esc(d.name)}</b><span class="small muted" style="display:block">${PL[b.k]} · ${vnd(b.final)}</span></span><span class="small" style="color:${drop(d)<0?'var(--accent-ink)':'var(--warn)'};font-weight:500">${drop(d)>0?'+':''}${drop(d)}%</span></a>`}).join(''):'<div class="small muted" style="padding:12px 14px">Không tìm thấy sản phẩm</div>';
   box.classList.add('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('modal').classList.contains('open')){closeModal();return}const q=document.getElementById('q');if(!q)return;
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='cmpq'){cmpSearch();return}if(e.key==='Escape'&&document.getElementById('modal').classList.contains('open')){closeModal();return}const q=document.getElementById('q');if(!q)return;
   if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();q.focus()}
   if(e.key==='Escape'){document.getElementById('qres').classList.remove('open');q.blur()}});
 document.addEventListener('click',e=>{if(!e.target.closest('.search')){const b=document.getElementById('qres');if(b)b.classList.remove('open')}});
